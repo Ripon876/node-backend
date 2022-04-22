@@ -1,0 +1,132 @@
+/*.notifications{
+
+}
+li.show .notifications .show{
+    overflow-y: scroll !important;
+	height: 250px;
+	display: flex !important;
+   flex-direction: column-reverse !important;
+}
+*/
+
+.dropdown-menu.notification-container.show {
+	overflow-y: scroll;
+	height:300px;
+	 display: flex;
+    flex-direction: column;
+
+}
+
+.dropdown-menu.message-container.show {
+    overflow-y: scroll;
+    height:300px;
+     display: flex;
+    flex-direction: column;
+
+}
+.notifications {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+}
+.messages {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+}
+.showResult,.give_number {
+    width: 93%;
+    height: auto; 
+    top: 30%;
+    transform: translateY(-220px);
+    box-shadow: 1px 1px 44px 11px #0202029e;
+    background-color: white;
+}
+.give_number {
+    width: 53%;
+    height: auto; 
+    top: 30%;
+    transform: translateY(-220px);
+    box-shadow: 1px 1px 44px 11px #0202029e;
+    background-color: white;
+}
+#profileDropdown img {
+    width: 23px;
+    height: 23px;
+    background: #b8c3d0;
+    padding: 2px;
+}
+
+.searchResult{
+    position: absolute;
+    top: 85%;
+    /*left: 18.2%;*/
+    z-index: 2222;
+}
+.main-panel {
+    background: #F5F7FB;
+}
+
+li.nav-item.active {
+    background: #242830;
+}
+li.nav-item:hover {
+    background: #242830;
+}
+.card{
+    box-shadow: 0 0 0.875rem 0 rgb(33 37 41 / 5%);
+}
+.dataTable thead tr {
+    background: #0e141e;
+    color: white;
+}
+.message-container {
+    width: 270px;
+}
+.notification-container {
+    width: 270px;
+}
+.dropdown-item .item-content p{
+    white-space: pre-line;
+}
+.message-container .dropdown-item .item-content p{
+    margin-top: -25px;
+}
+.dropdown:hover{
+    background: transparent !important;
+}
+.navbar{
+    box-shadow: 1px 1px 9px 0px #333232ba;
+    z-index: 9999;
+}
+.toast-container{
+    z-index: 9999999999999999999999 !important;
+    top: 100px  !important;
+}
+.toast-top-right {
+    top: 65px !important;
+ 
+}
+.toast{
+    border-top: 7px solid #15181d;
+    border-radius: 10px !important;
+    /*color: white !important;*/
+    background-color: white !important;
+}
+.toast-close-button{
+  color: #15181d !important;
+}
+.toast-success{
+    color: #44c4a1 !important;
+}
+.toast-error{
+    color: #e24d4c !important;
+}
+.toast-info{
+    color: #15181d !important;
+}
+.toast-warning{
+    color: #ffda2d !important;
+}
+li.hover-open.nav-item .menu-title {
+    color: white !important;
+    background: #0e141e !important;
+}

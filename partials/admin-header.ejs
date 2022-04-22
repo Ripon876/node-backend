@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   
+    <link rel="stylesheet" href="./dashboard/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="./dashboard/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="./dashboard/css/dataTables.bootstrap4.css">
+    
+    <link rel="stylesheet" href="./dashboard/css/style.css">
+    <link rel="stylesheet" href="./dashboard/css/main.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./dashboard/css/toastr.css" rel="stylesheet">
+  
+    
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <style type="text/css">
+    .page-body-wrapper{
+    padding-top: 0;
+    }
+    .border-bl{
+    border: 1px solid #e0e3e4 !important;
+    }
+    </style>
+    <script src="/dashboard/js/jquery.min.js"></script>
+    <script src="/dashboard/js/update-notice.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+
+<script src="./dashboard/js/toastr.js"></script>
+
+   <script type="text/javascript">
+
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "300",
+    "timeOut": "57000",
+    "extendedTimeOut": "85000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+   </script>
+
+
+
+
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar col-lg-12 col-12 p-0 d-flex flex-row">
+        <div class="navbar-brand-wrapper d-flex justify-content-center">
+          <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
+            <a class="navbar-brand brand-logo" href="/"><i class="fa fa-graduation-cap"></i> DASH</a>
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-sort-variant"></span>
+            </button>
+          </div>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item dropdown mr-1">
+              <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
+                <i class="mdi mdi-message-text mx-0"></i>
+                <span class="count" style="display: none;" id="newMessageCount" ></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right message-container navbar-dropdown" aria-labelledby="messageDropdown">
+                <p class="mb-0 font-weight-normal float-left dropdown-header text-white-50">Messages</p>
+
+<div class="messages">
+  
+
+  <a class="dropdown-item" href="/user/messages/dfgfd">
+    <div class="item-thumbnail">
+     <i class="mdi mdi-account-box" style="font-size: 30px;"></i>
+    </div>
+    <div class="item-content flex-grow">
+      <h6 class="ellipsis font-weight-normal">dfgfdg</h6>
+      <p class="font-weight-light small-text text-muted mb-0">
+       dfgfdgdfsdf dsfsdf dsfdsf dsfds  fdsf  dsfsd
+      </p>
+    </div>
+  </a>
+  
+</div>
+
+
+
+                
+              </div>
+            </li>
+            <li class="nav-item dropdown mr-4">
+              <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown" id="notificationDropdown" href="#" data-toggle="dropdown">
+                <i class="mdi mdi-bell mx-0"></i>
+                <span class="count" id="newNoticeCount"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown notification-container" aria-labelledby="notificationDropdown">
+                <p class="mb-0 font-weight-normal float-left dropdown-header text-white-50" >Notifications</p>
+                <div class="notifications">
+                
+                  <a href="/user/notice/dfgfdgfddfg  " class="dropdown-item">
+                    <div class="item-thumbnail">
+                      <div class="item-icon bg-white">
+                        <i class="mdi mdi-settings mx-0"></i>
+                      </div>
+                    </div>
+                    <div class="item-content">
+                      <p class="font-weight-normal"> dfgfdgdfsdf dsfsdf dsfdsf dsfds  fdsf dsf dsf dfds dsfdsf dsf dsfsdfdsf dsfsd...</p>
+                    </div>
+                  </a>
+
+                </div>
+              </div>
+            </li>
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <i class="mdi mdi-account" style="font-size: 1.6rem;"></i>
+                <span class="nav-profile-name">dfgdfgdf</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="/user/profile">
+                  <i class="mdi mdi-settings"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="/logout"  id="logoutBtn">
+                  <i class="mdi mdi-logout"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+          
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+<!-- <script src="/socket.io/socket.io.js"></script> -->
