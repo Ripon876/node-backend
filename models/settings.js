@@ -6,12 +6,16 @@ var linkSchema = new mongoose.Schema({
 },{ _id : false })
 var settingSchema = new mongoose.Schema({
 	logo : String,
-	social_links :  [linkSchema],
+	social_links :  {
+		fb : String,
+		twitter : String,
+		instagram : String
+	},
 	description :  String,
 	keywords : {default : [], type: Array},
 	favicon :  String,
 	email :  String,
-	number : Number
+	number : String
 
 })
  

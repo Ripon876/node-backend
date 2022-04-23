@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 
 
 const serviceSchema = new mongoose.Schema({
-	icon :  String,
+	img :  String,
 	title :  String,
 	description : String
-})
+},{ _id : false })
 
 const servicesSchema = new mongoose.Schema({
 	title :  String,

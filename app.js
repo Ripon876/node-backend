@@ -22,7 +22,8 @@ var fs = require('fs');
 var path = require('path');
 var app = express();
 var http = require('http');
-const https = require('https');
+var cors = require('cors');
+var https = require('https');
 var server = http.createServer(app);
 var {
   Server
@@ -34,7 +35,7 @@ var apis  = require("./routes/apis");
 
 var mongoDbStr;
 
-
+app.use(cors())
 
 app.set("view engine", "ejs");
 
@@ -43,7 +44,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-
+app.use(bodyParser.json());
 
 
 /*
