@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
 const serviceSchema = new mongoose.Schema({
 	img :  String,
 	title :  String,
-	description : String
+	description : String,
+	show_content_first : {type: Boolean, default: false}
 },{ _id : false })
 
 const servicesSchema = new mongoose.Schema({
@@ -14,6 +15,6 @@ const servicesSchema = new mongoose.Schema({
 	srevices : [serviceSchema]
 })
 
-const Services = mongoose.model("Srevices",servicesSchema);
+const Services = mongoose.model("Services",servicesSchema);
 
 module.exports  = Services;

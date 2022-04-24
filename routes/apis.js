@@ -1,6 +1,6 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
+var express = require("express");
+var router = express.Router();
+var mongoose = require("mongoose");
 var Site_settings = require("../models/settings");
 var Slider = require("../models/slides");
 var About = require("../models/about");
@@ -8,14 +8,16 @@ var Services = require("../models/services");
 var Clients = require("../models/clients");
 var WeOffer = require("../models/weOffer");
 var Messages = require("../models/messages");
+var Careers = require("../models/careers");
+var DDSD = require('./seed');
 
-
+console.log(DDSD)
 
 
 // site settings api
 router.get("/site_settings",(req,res) => {
 	Site_settings.find({},(err,Settings) => {
-		if(err){
+		if(err || Settings == []){
       res.status(400).json({err: "something went wrong"})
     }else{
       var newSettings =   Settings[0].toObject();
@@ -34,7 +36,7 @@ router.get("/site_settings",(req,res) => {
 router.get('/slides',(req,res) => {
 
   Slider.find({},(err,slider) => {
-    if(err){
+    if(err || slider == []){
       res.status(400).json({err: "something went wrong"})
      }else{
    
@@ -52,7 +54,7 @@ router.get('/slides',(req,res) => {
 // about section api
 router.get("/about",(req,res) => {
 	About.find({},(err,data) => {
-		if(err){  
+		if(err || data == []){  
       res.status(400).json({err: "something went wrong"});
     }else{
         var dataWithOutId =   data[0].toObject();
@@ -69,7 +71,7 @@ router.get("/about",(req,res) => {
 // services api
 router.get("/services",(req,res) => {
 	Services.find({},(err,data) => {
-		if(err){
+		if(err || data == []){
      res.status(400).json({err: "something went wrong"}) 
    }else{
     var dataWithOutId =   data[0].toObject();
@@ -85,7 +87,7 @@ router.get("/services",(req,res) => {
 // our clients api
 router.get("/clients",(req,res) => {
   Clients.find({},(err,data) => {
-    if(err){
+    if(err || data == []){
       res.status(400).json({err: "something went wrong"})
     }else{
      var dataWithOutId =   data[0].toObject();
@@ -101,7 +103,7 @@ router.get("/clients",(req,res) => {
 // what we offer api
 router.get("/what_we_offer",(req,res) => {
   WeOffer.find({},(err,data) => {
-    if(err){
+    if(err || data == []){
       res.status(400).json({err: "something went wrong"})
     }else{
      var dataWithOutId =   data[0].toObject();
@@ -111,6 +113,47 @@ router.get("/what_we_offer",(req,res) => {
     }
 
   })
+})
+
+
+// careers api
+router.get("/careers",(req,res) => {
+  Careers.find({},(err,data) => {
+    if(data === []){
+      console.log(" empty")
+    }
+    if(err || data === []){
+      res.status(400).json({err: "something went wrong"});
+      console.log(err)
+    }else{
+     var dataWithOutId =   data[0].toObject();
+     delete dataWithOutId._id;
+     delete dataWithOutId.__v;
+     res.status(200).json(dataWithOutId);      
+    }
+
+  })
+})
+
+
+router.get('/careers/:title',(req,res) => {
+  var title = req.params.title.replace(/_/g,' ')
+   
+   if(title){
+    Careers.find({},(err,data) => {
+      if(err || data === []){
+        res.status(400).json({err: "something went wrong"});
+      }else{
+
+    var opening =   data[0].openings.find((obj) => obj.title === title )
+    res.status(200).json(opening)
+      }
+    })
+   }
+
+
+
+
 })
 
 
@@ -141,24 +184,6 @@ router.post('/contact',(req,res) => {
 
 
 
-
-
- // Clients.collection.drop();
-
-
-var set = {
-  clients : ["http://localhost:3000/img/c1.png",'http://localhost:3000/img/c1.png','http://localhost:3000/img/c1.png','http://localhost:3000/img/c1.png','http://localhost:3000/img/c1.png','http://localhost:3000/img/c1.png']
-}
-
-
- // Clients.create(set,(err,ddfds) => {
- //    if(err) console.log(err);
-   
- //    console.log(ddfds);
- // });
-
-
-// Clients.find({},(err,dt) => { console.log(dt)})
 
 
 module.exports = router;

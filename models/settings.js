@@ -15,7 +15,8 @@ var settingSchema = new mongoose.Schema({
 	keywords : {default : [], type: Array},
 	favicon :  String,
 	email :  String,
-	number : String
+	number : String,
+	address : String
 
 })
  
