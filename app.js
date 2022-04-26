@@ -32,6 +32,7 @@ var io = new Server(server);
 var port = process.env.PORT || 5000;
 var login  = require("./routes/login");
 var apis  = require("./routes/apis");
+var admin  = require("./routes/admin");
 
 var mongoDbStr;
 
@@ -45,7 +46,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-
+app.use(fileUpload());
 
 /*
 if (port === 3000) {
@@ -92,6 +93,7 @@ passport.deserializeUser(function(obj, cb) {
 
 app.use(login);
 app.use("/api", apis);
+app.use(admin);
 
 
 app.get('/',(req,res) => {

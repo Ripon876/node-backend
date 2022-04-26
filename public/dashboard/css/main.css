@@ -130,3 +130,18 @@ li.hover-open.nav-item .menu-title {
     color: white !important;
     background: #0e141e !important;
 }
+
+.content-wrapper *  input  {
+    border: 2px solid #0e141ef2 !important;
+    border-radius: 5px;
+    font-size: 18px;
+}
+.content-wrapper *  label  {
+    font-size: 18px;
+}
+.border{
+    border: 2px solid #0e141ef2 !important;
+}
+#description{
+    font-size: 18px;
+}

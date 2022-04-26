@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var User = require("../models/user");
 var Site_settings = require("../models/settings");
 var Slider = require("../models/slides");
 var About = require("../models/about");
@@ -11,6 +12,10 @@ var Interns = require("../models/interns");
 
 
 const DDSD = 'dsfdfdfds';
+
+
+
+
 
 
 
