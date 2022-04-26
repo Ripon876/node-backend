@@ -7,6 +7,7 @@ var Clients = require("../models/clients");
 var WeOffer = require("../models/weOffer");
 var Messages = require("../models/messages");
 var Careers = require("../models/careers");
+var Interns = require("../models/interns");
 
 
 const DDSD = 'dsfdfdfds';
@@ -279,6 +280,44 @@ var careerseed = {
 
 
 // Careers.find({},(err,dt) => { console.log(dt)})
+
+
+
+
+
+var internseed = {
+	name : "Jonson",
+	position : "Backend Developer",
+	description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, quos laborum quidem magnam rem quo ducimus veritatis. Iusto iure, dolorum similique qui quos nobis, adipisci enim ipsa possimus sapiente hic doloremque quae reiciendis. Ipsa incidunt nemo amet ipsum hic modi repudiandae recusandae odio voluptates cumque, totam sint ad similique laboriosam",
+	duration : "Duration: 6 Month (September 2021-December 2021)",
+	social_links : {
+	  fb: "https://facebook.com",
+		twitter : "https://twitter.com",
+		instagram : "https://instagram.com",
+		linkedIn : "",
+  },
+  img: "http://localhost:3000/img/intern.png",
+	projects : [
+  {
+  	title :  "A2 Series",
+	  url : 'a2series.com'
+  },
+  {
+  	title :  "Sourceround",
+	  url : 'sourceround.com'
+  }
+	]
+}
+
+// Interns.collection.drop();
+
+//  Interns.create(internseed,(err,ddfds) => {
+//     if(err) console.log(err);
+//     console.log(ddfds);
+//  });
+
+
+// Interns.find({},(err,dt) => { console.log(dt)})
 
 
 

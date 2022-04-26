@@ -9,9 +9,9 @@ var Clients = require("../models/clients");
 var WeOffer = require("../models/weOffer");
 var Messages = require("../models/messages");
 var Careers = require("../models/careers");
-var DDSD = require('./seed');
+var Interns = require("../models/interns");
 
-console.log(DDSD)
+var DDSD = require('./seed'); // sample seed file
 
 
 // site settings api
@@ -149,12 +149,56 @@ router.get('/careers/:title',(req,res) => {
     res.status(200).json(opening)
       }
     })
-   }
+   } 
 
 
 
 
 })
+
+// interns api
+router.get("/interns",(req,res) => {
+  Interns.find({},(err,data) => {
+    if(data === []){
+      console.log(" empty")
+    }
+    if(err || data === []){
+      res.status(400).json({err: "something went wrong"});
+      console.log(err)
+    }else{
+     // var dataWithOutId =   data[0].toObject();
+     // delete dataWithOutId._id;
+     // delete dataWithOutId.__v;
+     res.status(200).json(data);      
+    }
+
+  })
+})
+
+
+router.get("/interns/:id",(req,res) => {
+
+   if(req.params.id){
+      Interns.findById(req.params.id,(err,data) => {
+        if(data === []){
+          console.log(" empty")
+        }
+        if(err || data === []){
+          res.status(400).json({err: "something went wrong"});
+          console.log(err)
+        }else{
+         // var dataWithOutId =   data[0].toObject();
+         // delete dataWithOutId._id;
+         // delete dataWithOutId.__v;
+         res.status(200).json(data);      
+        }
+
+      })
+   }
+
+
+})
+
 
 
 router.post('/contact',(req,res) => {
