@@ -10,8 +10,8 @@ var WeOffer = require("../models/weOffer");
 var Messages = require("../models/messages");
 var Careers = require("../models/careers");
 var Interns = require("../models/interns");
+var UploadFile = require("../helpers/fileUpload");
 
-const path = require("path");
 
 
 
@@ -21,12 +21,21 @@ router.get('/settings',(req,res) => {
 
 
 
-router.post('/settings',(req,res) => {
+router.post('/settings',async (req,res) => {
+
+	var fileName;
+
 	if(req.body){
+	 fileName = req.body.logo || 'Logo';
 		console.log(req.body)
 	}
 	if (req.files) {
-		 console.log(req.files.img)
+
+	 var uploadImg =  UploadFile(req.files.img,fileName);
+
+		if(uploadImg){
+			console.log('done')
+		}
 	}
 })
 
