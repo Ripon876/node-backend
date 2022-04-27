@@ -50,7 +50,7 @@ var sdfd = {
 		instagram : 'instagram'
 	},
 	description :  'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.',
-	keywords : ['keyword 1','keyword 2'],
+	keywords : 'keyword 1 , keyword 2',
 	favicon :  'favicon url',
 	email :  'sample@gmail.com',
 	number : '+1 5589 55488',

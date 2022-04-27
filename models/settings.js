@@ -12,7 +12,7 @@ var settingSchema = new mongoose.Schema({
 		instagram : String
 	},
 	description :  String,
-	keywords : {default : [], type: Array},
+	keywords : String,
 	favicon :  String,
 	email :  String,
 	number : String,

@@ -10,29 +10,14 @@ const UploadFile  = function(file,name) {
 				return false;
 			}else{
 				var ext = file.name.split(".").reverse()[0];
-                var fileName = name + '.' +  ext;
+            var fileName = name + '.' +  ext;
 
-				file.mv(path.join(__dirname, '../public/uploads/', fileName), function(err) {
-				    
-				    if (err) {
-				    	 msg = err;
-				     	return;
-				    }
-function ddfs() {
-	status = true;
-	 msg  = 'hie'
-}
-ddfs()
-				    
-				   
-				    
-				}); 
+				file.mv(path.join(__dirname, '../public/uploads/', fileName))
 			}
  
- console.log(status)
- console.log(msg)
 
+return `/uploads/${fileName}`;
 
-  }
+}
 
 module.exports = UploadFile;

@@ -16,18 +16,6 @@ const slider = new mongoose.Schema({
 })
 
 
-const sk = new mongoose.Schema({
-	name : String
-})
-
-
-
-
-
-
-
-
-
 
 
 
