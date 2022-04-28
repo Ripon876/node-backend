@@ -13,13 +13,12 @@
         
 <div class="sliderForm py-5">
   <form id="form" method="post" enctype="multipart/form-data">
-              <div class="align-items-center form-group row">
-                <div class="col-6">
-                   <label for="slide_duration">Slide Duration</label>
+      <div class="align-items-center form-group row">
+            <div class="col-6">
+                   <label for="slide_duration">Slide Duration (ms)</label>
                 <input type="number" class="form-control" required name="slide_duration"  value="<%= slider.slide_duration %>" id="slide_duration" placeholder="Slide duration">
-                </div> 
-               
-                <div class="col-6 px-5">
+            </div> 
+            <div class="col-6 px-5">
                 <label for="slide_duration">Axis</label>
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="axis" id="vertical"    <%=  slider.axis == "y" ? `checked='true'` : `` %>>
@@ -33,14 +32,77 @@
                    Horizontal
                   </label>
                 </div>
-                </div> 
-               
-              </div>
-              <div>
-                <button type="submit" id="submit" class="btn btn-primary">Save</button>
-              </div>
-            </form>
+            </div> 
+      </div>
+      <div>
+          <button type="submit" id="submit" class="btn btn-primary">Save</button>
+      </div>
+  </form>
 </div>
+
+
+
+
+
+
+
+<!-- slide editing form -->
+
+
+<div id="slideEditForm"  class="py-5">
+  
+    <form id="slideEdit"  method="post" enctype="multipart/form-data">
+        <div class="form-group">
+              <label for="title">Title</label>
+                <input type="text" class="form-control" required name="title"  id="title" placeholder="title">
+              </div>
+              <div class="d-flex form-group row">
+                <div class="col-lg-4 col-md-4">
+                  <label for="img">Image</label>
+                  <input type="file"  style="border: none !important;" class="form-control" name="img" id="img">
+                </div>
+                <div id="imgPreviewBox" class="col col-lg-8 text-center" style="height: 500px;width: auto;margin: auto;overflow: scroll;position: relative;">
+                  <img src=''   id="imgPreview"   class="img-fluid"style="left: 50%;transform: translate(-50%, 0);position: absolute;">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control border"  required name="description" id="description" rows="3" placeholder="description" maxlength="125"></textarea>
+              </div>
+              <div class="form-group d-flex">
+
+              <div class="w-50"> 
+                  <label for="color">Text Color</label>
+                  <input type="color"  class="form-control"   name="color" id="color">
+              </div>    
+              <div  class="w-50 px-5 py-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="show_img_first"  id="show_img_first">
+                  <label class="form-check-label" for="show_img_first">
+                    Show Image First
+                  </label>
+                </div>
+              </div>
+
+              </div>
+        <div>
+            <button type="submit" id="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                   <div class="table-responsive">
                     <table id="recent-purchases-listing" class="table">
@@ -65,8 +127,9 @@
                          <td><h4><%= slide.color %></h4></td>
                          <td><h4><%=  slide.show_img_first ? 'Yes' : 'No' %></h4></td>
                          <td>
-                          <button class="btn btn-primary px-3 py-2">Edit</button>
-                          <button class="btn btn-danger px-3 py-2">Delete</button>
+                          <input type="text" value="<%= JSON.stringify(slide) %>" class="d-none">
+                          <button class="btn btn-primary px-3 py-2 editSlide">Edit</button>
+                          <button class="btn btn-danger px-3 py-2 deleteSlide">Delete</button>
                          </td>
                         </tr>
                         <% }) %>
@@ -84,6 +147,7 @@
 </div>
 <script>
   $('.sliderForm').hide();
+  $('#slideEditForm').hide();
 
 
   $('#editForm').click(()=>{
@@ -93,7 +157,7 @@
 </script>
 
 <script type="text/javascript">
-  $('#form').submit((e)=> {
+  $('.sliderForm #form').submit((e)=> {
     e.preventDefault();
   
    
@@ -126,10 +190,136 @@ $.ajax({
 
   })
 
+</script>
+
+<script>
+   
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          function na(){
+            let im = document.createElement("logoPreview");
+            $('#imgPreview').attr("src", e.target.result)
+            $('#imgPreviewBox').show(300);
+          }
+          na();
+        }
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+      }
+    }
+    $("#img").change(function() {
+    readURL(this);
+    });
 
 
+
+
+
+
+var slideData;
+var btn;
+
+  $(".editSlide").on('click',(e) => {
+      btn = e;
+      slideData =  JSON.parse(e.target.previousElementSibling.value);
+      $('#slideEditForm').show(300);
+      $('#title').val(slideData.title);
+      $('#imgPreview').attr('src',slideData.img);
+      $('#description').val(slideData.description);
+      $('#color').val(slideData.color);
+      slideData.show_img_first ?   $('#show_img_first').attr('checked',true) :  $('#show_img_first').attr('checked',false);
+      $(window).scrollTop(0);
+
+
+
+
+  })
+
+ 
 
 </script>
+
+
+<script>
+   $('#slideEditForm form').submit((e)=> {
+    e.preventDefault();
+  
+  var formData = new FormData(document.getElementById('slideEdit'))
+
+
+  formData.append("oldData",JSON.stringify(slideData) );
+
+
+$.ajax({
+  type: 'PUT',
+  url : '/slider',
+  data : formData,
+processData: false,
+contentType: false,
+  success : function(res) {
+    if(res.status){
+      console.log(res)
+       Swal.fire(
+          'Success',
+          'Settings updated',
+          'success'
+        ).then(()=> {
+
+          $('#slideEditForm').hide(300);
+          $('#title').val('');
+          $('#imgPreview').attr('src','');
+          $('#description').val('');
+          $('#color').val('');
+          $('#show_img_first').attr('checked',false)
+        })
+        .then(() =>{
+            // var data =  JSON.parse(res);
+            // console.log(res.slide.title)
+            updateSlide(btn,res.slide)
+         
+        })
+    }
+  },
+  error : function(err) {
+    console.log(err);
+  }
+})
+
+  })
+</script>
+
+
+
+<script>
+  function updateSlide(e,slide) {
+    e.target.previousElementSibling.value = JSON.stringify(slide);
+    var showImgFirst = e.target.parentElement.previousElementSibling.children[0];
+  var color = e.target.parentElement.previousElementSibling.previousElementSibling.children[0];
+  var title = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.children[0];
+var img  = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.children[0];
+
+
+
+title.textContent = slide.title;
+showImgFirst.textContent = slide.show_img_first ? 'Yes' : 'No' ;
+img.src = slide.img;
+color.textContent = slide.color
+
+
+console.log(color,title)
+
+
+
+
+
+
+
+
+  }
+</script>
+
 
 
 <%- include("../../partials/admin-footer") -%>

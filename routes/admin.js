@@ -111,7 +111,7 @@ router.get("/slider/new",(req,res)=> {
 
 
 router.post("/slider/slides",async (req,res)=> {
-	    var serverURl = `${req.protocol}://${req.get('host')}`;
+	  var serverURl = `${req.protocol}://${req.get('host')}`;
 		var fileName =  'slides' + Math.floor(Math.random() * 10000);
 		var link = serverURl;
 
@@ -148,7 +148,58 @@ Slider.find({},(err,sliders) => {
 
 
 
+router.put('/slider',async (req,res) => {
 
+	  var serverURl = `${req.protocol}://${req.get('host')}`;
+		var fileName =  'slides' + Math.floor(Math.random() * 10000);
+		var link = serverURl;
+
+		   if (req.files) {
+		  	imgPath = await UploadFile(req.files.img,fileName);
+		  link += imgPath;
+		}
+
+     var {oldData,...newData} =  req.body;
+
+
+    if(newData.show_img_first){
+     	newData.show_img_first = true;
+    }else{
+     	newData.show_img_first = false;
+    }
+
+    if(req.files){
+    	newData.img = link;
+    }else{
+    	newData.img  =  JSON.parse(oldData).img;
+    }
+
+
+  Slider.find({},(err,sliders)=> {
+
+	  if(err) res.status(501).json({err: "something went wrong"});
+
+
+	   Slider.findById(sliders[0]._id,(err,slider) => {
+		     if(err) res.status(501).json({err: "something went wrong"});
+		     
+		     var slideIndex = slider.slides.findIndex(o => o.title === JSON.parse(oldData).title && o.img === JSON.parse(oldData).img);
+			 
+			   slider.slides[slideIndex] = newData;
+			   slider.save((err,slide)=> {
+			   		if(err) res.status(501).json({err: "something went wrong"});
+				      	res.status(200).json({status :  true,slide : slider.slides[slideIndex]});
+			   })
+
+	    
+	   })
+
+  })
+
+
+
+ 
+})
 
 
 

@@ -11,7 +11,7 @@
           </div>
         
 
-<!-- <%= settings %> -->
+
 
               <form id="form" method="post" enctype="multipart/form-data">
               <div class="form-group">
@@ -66,14 +66,8 @@
     reader.onload = function(e) {
     function na(){
     let im = document.createElement("logoPreview");
-    // im.src = e.target.result;
     $('#logoPreview').attr("src", e.target.result)
     $('#imgPreviewBox').show(300);
-    // console.log(e.target.result)
-    // photos.push(e.target.result);
-    // photos.save();
-    // inp = photos;
-    // photoContainer.appendChild(im);
     }
     na();
     // console.log(e.target.result)
