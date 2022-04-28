@@ -145,3 +145,8 @@ li.hover-open.nav-item .menu-title {
 #description{
     font-size: 18px;
 }
+.table td img {
+    width: 130px !important;
+    height: auto !important;
+    border-radius: 10px !important;
+}

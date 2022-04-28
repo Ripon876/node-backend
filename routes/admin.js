@@ -78,6 +78,30 @@ router.post('/settings',middlewares.isLoggedIn,async (req,res) => {
 
 // new slider route
 
+router.get('/slider',(req,res) => {
+
+	Slider.find({},(err,sliders) => {
+       if(!err){
+         res.render('./admin/slider',{slider: sliders[0]});
+       }
+	})
+
+})
+
+router.post('/slider',(req,res) => {
+	if(req.body){
+		Slider.find({},(err,sliders)=> {
+			if(err) res.status(501).json({err: "something went wrong"});
+
+			Slider.findOneAndUpdate(sliders[0],req.body,{new : true},(err,slider) => {
+				if(err) res.status(501).json({err: "something went wrong"});
+				res.status(200).json({status :  true});
+			})
+			
+		})
+	}
+})
+
 router.get("/slider/new",(req,res)=> {
 	res.render('./admin/newslider')
 })
@@ -85,7 +109,8 @@ router.get("/slider/new",(req,res)=> {
 
 
 
-router.post("/slider",async (req,res)=> {
+
+router.post("/slider/slides",async (req,res)=> {
 	    var serverURl = `${req.protocol}://${req.get('host')}`;
 		var fileName =  'slides' + Math.floor(Math.random() * 10000);
 		var link = serverURl;
@@ -94,19 +119,6 @@ router.post("/slider",async (req,res)=> {
 			imgPath = await UploadFile(req.files.img,fileName);
 		 link += imgPath;
 		}
-	
-
-/*
-
-	title : String,
-	description : String,
-	color :  String,
-	img : String,
-	show_img_first : {type: Boolean,default : false}
-
-
-*/
-
 var data = req.body;
 data.img = link;
 data.show_img_first === 'on' ? data.show_img_first  = true : data.show_img_first = false;
@@ -129,10 +141,6 @@ Slider.find({},(err,sliders) => {
 	 })
 
 })
-
-
-
-
 
 
 })
