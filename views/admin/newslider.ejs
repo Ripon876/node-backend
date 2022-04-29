@@ -70,7 +70,7 @@
     $('#imgPreviewBox').show(300);
     }
     na();
-    // console.log(e.target.result)
+   
     }
     reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
@@ -99,7 +99,6 @@ $('#form').on('submit',(e) => {
 e.preventDefault();
 var formData = new FormData(document.getElementById('form'));
 
-console.log(formData)
 
 $.ajax({
 type: "POST",
@@ -111,10 +110,10 @@ success: function(response) {
  if(response.status){
     Swal.fire(
     'Success',
-    'Settings updated',
+    'Slider Added',
     'success'
   ).then(()=> {
-    window.location.href = "/admin"
+    window.location.href = "/slider"
   })
  }
 

@@ -11,6 +11,7 @@ var Messages = require("../models/messages");
 var Careers = require("../models/careers");
 var Interns = require("../models/interns");
 var UploadFile = require("../helpers/fileUpload");
+var deleteFile = require("../helpers/deleteFile");
 var middlewares = require("../middlewares/middleware");
 
 
@@ -27,49 +28,51 @@ router.get('/settings',middlewares.isLoggedIn,(req,res) => {
 
 router.post('/settings',middlewares.isLoggedIn,async (req,res) => {
 
-	var fileName = req.body.logo || 'Logo';
-	var imgPath;
-	var link;
-	var newSettings = {
-		social_links: {}
-	}
-
-	
-	if (req.files) {
-
-		imgPath = await UploadFile(req.files.img,fileName);
-	 link = imgPath;
-	}
-
-
-
-	if(req.body){
-		for (key in req.body) {
-			if(key === 'fb' || key === 'twitter' || key === 'instagram'){
-				newSettings.social_links[key] = req.body[key];
-			}else{
-				newSettings[key] = req.body[key]
-			}
+	if(req.body){ 
+		
+		var fileName = req.body.logo || 'Logo';
+		var imgPath;
+		var link;
+		var newSettings = {
+			social_links: {}
 		}
-		 
-	if(link){
-		newSettings.logo = link;
+
+		
+		if (req.files) {
+
+			imgPath = await UploadFile(req.files.img,fileName);
+		 link = imgPath;
+		}
+
+
+
+		if(req.body){
+			for (key in req.body) {
+				if(key === 'fb' || key === 'twitter' || key === 'instagram'){
+					newSettings.social_links[key] = req.body[key];
+				}else{
+					newSettings[key] = req.body[key]
+				}
+			}
+			 
+		if(link){
+			newSettings.logo = link;
+		}
+
+		Site_settings.find({},(err,data)=> {
+			if(err) res.status(501).json({err: "something went wrong"});
+
+				Site_settings.findOneAndUpdate(data[0],newSettings,{new : true},(err,settings)=> {
+					
+					if(err)  res.status(501).json({err: "something went wrong"});
+					// console.log(settings);
+					res.status(200).json({status :  true});
+
+				})
+
+		})
+		}
 	}
-
-	Site_settings.find({},(err,data)=> {
-		if(err) res.status(501).json({err: "something went wrong"});
-
-			Site_settings.findOneAndUpdate(data[0],newSettings,{new : true},(err,settings)=> {
-				
-				if(err)  res.status(501).json({err: "something went wrong"});
-				// console.log(settings);
-				res.status(200).json({status :  true});
-
-			})
-
-	})
-	}
-
 
 })
 
@@ -78,7 +81,7 @@ router.post('/settings',middlewares.isLoggedIn,async (req,res) => {
 
 // new slider route
 
-router.get('/slider',(req,res) => {
+router.get('/slider',middlewares.isLoggedIn,(req,res) => {
 
 	Slider.find({},(err,sliders) => {
        if(!err){
@@ -102,7 +105,7 @@ router.post('/slider',(req,res) => {
 	}
 })
 
-router.get("/slider/new",(req,res)=> {
+router.get("/slider/new",middlewares.isLoggedIn,(req,res)=> {
 	res.render('./admin/newslider')
 })
 
@@ -110,98 +113,126 @@ router.get("/slider/new",(req,res)=> {
 
 
 
-router.post("/slider/slides",async (req,res)=> {
-	  var serverURl = `${req.protocol}://${req.get('host')}`;
-		var fileName =  'slides' + Math.floor(Math.random() * 10000);
-		var link = serverURl;
+router.post("/slider/slides",middlewares.isLoggedIn,async (req,res)=> {
+	
 
-		if (req.files) {
-			imgPath = await UploadFile(req.files.img,fileName);
-		 link += imgPath;
-		}
-var data = req.body;
-data.img = link;
-data.show_img_first === 'on' ? data.show_img_first  = true : data.show_img_first = false;
+	if(req.body){
+		  var serverURl = `${req.protocol}://${req.get('host')}`;
+			var fileName =  'slides' + Math.floor(Math.random() * 10000);
+			var link = serverURl;
 
-Slider.find({},(err,sliders) => {
-	if(err) res.status(501).json({err: "something went wrong"});
+			if (req.files) {
+				imgPath = await UploadFile(req.files.img,fileName);
+			 link += imgPath;
+			}
+			var data = req.body;
+			data.img = link;
+			data.show_img_first === 'on' ? data.show_img_first  = true : data.show_img_first = false;
 
-	 Slider.findById(String(sliders[0]._id),(err,slider) => {
-	 	if(err) res.status(501).json({err: "something went wrong"});
+			Slider.find({},(err,sliders) => {
+				if(err) res.status(501).json({err: "something went wrong"});
 
-       slider.slides.push(data);
-       slider.total_slides++;
+				 Slider.findById(String(sliders[0]._id),(err,slider) => {
+				 	if(err) res.status(501).json({err: "something went wrong"});
 
-       slider.save((err,sld)=> {
-	       	if(err) res.status(501).json({err: "something went wrong"});
-	       	res.status(200).json({status :  true});
-	       	
-       })
+			       slider.slides.push(data);
+			       slider.total_slides++;
 
-	 })
+			       slider.save((err,sld)=> {
+				       	if(err) res.status(501).json({err: "something went wrong"});
+				       	res.status(200).json({status :  true});
+				       	
+			       })
+
+				 })
+
+			})
+  }
 
 })
 
 
-})
 
 
+router.put('/slider',middlewares.isLoggedIn,async (req,res) => {
+
+		if(req.body){ 
+			  var serverURl = `${req.protocol}://${req.get('host')}`;
+				var fileName =  'slides' + Math.floor(Math.random() * 10000);
+				var link = serverURl;
+
+				   if (req.files) {
+				  	imgPath = await UploadFile(req.files.img,fileName);
+				  link += imgPath;
+				}
+
+		     var {oldData,...newData} =  req.body;
 
 
-router.put('/slider',async (req,res) => {
+		    if(newData.show_img_first){
+		     	newData.show_img_first = true;
+		    }else{
+		     	newData.show_img_first = false;
+		    }
 
-	  var serverURl = `${req.protocol}://${req.get('host')}`;
-		var fileName =  'slides' + Math.floor(Math.random() * 10000);
-		var link = serverURl;
+		    if(req.files && deleteFile(getImgName(JSON.parse(oldData).img))){
 
-		   if (req.files) {
-		  	imgPath = await UploadFile(req.files.img,fileName);
-		  link += imgPath;
-		}
+		    	newData.img = link;
+		    }else{
+		    
+		    	newData.img  =  JSON.parse(oldData).img;
+		    }
 
-     var {oldData,...newData} =  req.body;
+		  Slider.find({},(err,sliders)=> {
 
+			  if(err) res.status(501).json({err: "something went wrong"});
+			   Slider.findById(sliders[0]._id,(err,slider) => {
+				     if(err) res.status(501).json({err: "something went wrong"});
+				       
+				     var slideIndex = slider.slides.findIndex(o => o.title === JSON.parse(oldData).title && o.img === JSON.parse(oldData).img);
+					 
+					   slider.slides[slideIndex] = newData;
+					   slider.save((err,slide)=> {
+					   		if(err) res.status(501).json({err: "something went wrong"});
+						      	res.status(200).json({status :  true,slide : slider.slides[slideIndex]});
+					   })
 
-    if(newData.show_img_first){
-     	newData.show_img_first = true;
-    }else{
-     	newData.show_img_first = false;
-    }
-
-    if(req.files){
-    	newData.img = link;
-    }else{
-    	newData.img  =  JSON.parse(oldData).img;
-    }
-
-
-  Slider.find({},(err,sliders)=> {
-
-	  if(err) res.status(501).json({err: "something went wrong"});
-
-
-	   Slider.findById(sliders[0]._id,(err,slider) => {
-		     if(err) res.status(501).json({err: "something went wrong"});
-		     
-		     var slideIndex = slider.slides.findIndex(o => o.title === JSON.parse(oldData).title && o.img === JSON.parse(oldData).img);
-			 
-			   slider.slides[slideIndex] = newData;
-			   slider.save((err,slide)=> {
-			   		if(err) res.status(501).json({err: "something went wrong"});
-				      	res.status(200).json({status :  true,slide : slider.slides[slideIndex]});
+			    
 			   })
 
-	    
-	   })
+		  })
+		 }
 
-  })
-
-
-
- 
 })
 
 
+router.delete('/slider',middlewares.isLoggedIn,(req,res)=> {
+
+	if(req.body){
+	  Slider.find({},(err,sliders)=> {
+
+		  if(err) res.status(501).json({err: "something went wrong"});
+
+
+		   Slider.findById(sliders[0]._id,(err,slider) => {
+			     if(err) res.status(501).json({err: "something went wrong"});
+			       
+			     var slideIndex = slider.slides.findIndex(o => o.title === req.body.title && o.img === req.body.img);
+				 
+	        deleteFile(getImgName(req.body.img))
+	  			slider.slides.splice(slideIndex,1)
+	  			slider.total_slides--;
+
+				    slider.save((err,slide)=> {
+				   		if(err) res.status(501).json({err: "something went wrong"});
+					       res.status(200).json({status : true,msg : 'Successfully deleted'})
+				   })
+		    
+		   })
+	   })
+	}
+
+})
 
 
 
@@ -210,3 +241,4 @@ router.put('/slider',async (req,res) => {
 module.exports = router;
 
 
+const getImgName = thePath => thePath.substring(thePath.lastIndexOf('/') + 1)

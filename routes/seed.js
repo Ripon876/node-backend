@@ -83,7 +83,7 @@ var sliderseed = {
 	{
 	title : "sample title 1",
 	description : 'Curabitur aliquet quam id dui posuere blandit. Cras ultricies ligula sed magna dictum porta.',
-	color :  'black',
+	color :  '#000',
 	img : 'http://localhost:3000/img/3.svg',
 	show_img_first : false
 
@@ -91,7 +91,7 @@ var sliderseed = {
     {
 	title : "sample title 2",
 	description : 'Curabitur aliquet quam id dui posuere blandit. Cras ultricies ligula sed magna dictum porta.',
-	color :  'black',
+	color :  '#000',
 	img : 'http://localhost:3000/img/2.svg',
 	show_img_first : true
 
@@ -99,7 +99,7 @@ var sliderseed = {
     {
 	title : "sample title 3",
 	description : 'Curabitur aliquet quam id dui posuere blandit. Cras ultricies ligula sed magna dictum porta.',
-	color :  'black',
+	color :  '#000',
 	img : 'http://localhost:3000/img/1.svg',
 	show_img_first : false
 
@@ -113,10 +113,10 @@ var sliderseed = {
 
 // Slider.collection.drop();
 
-//  Slider.create(sliderseed,(err,ddfds) => {
-//     if(err) console.log(err);
-//     console.log(ddfds);
-//  });
+ // Slider.create(sliderseed,(err,ddfds) => {
+ //    if(err) console.log(err);
+ //    console.log(ddfds);
+ // });
 
 
 // Slider.find({},(err,dt) => { console.log(dt)})

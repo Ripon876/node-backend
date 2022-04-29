@@ -114,20 +114,7 @@ toastr["info"]("ripon", "Ripon");
 $('form').on('submit',(e) => {
 e.preventDefault();
 var formData = new FormData(document.getElementById('formID'));
-/*const formData = $('form').serializeArray();
-console.log(formData)
-let data = {
-social_links : {}
-};
-for (key in formData) {
-if(formData[key].name == 'fb' || formData[key].name == 'twitter' || formData[key].name == 'instagram'){
-data.social_links[formData[key].name] = formData[key].value;
-}else{
-data[formData[key].name] = formData[key].value;
-}
 
-
-}*/
 
 $.ajax({
 type: "POST",
@@ -153,26 +140,20 @@ console.log(err)
 </script>
 <script>
 function readURL(input) {
-if (input.files && input.files[0]) {
-var reader = new FileReader();
-reader.onload = function(e) {
-function na(){
-let im = document.createElement("logoPreview");
-// im.src = e.target.result;
-$('#logoPreview').attr("src", e.target.result)
-$('#imgPreviewBox').show(300);
-console.log(e.target.result)
-// photos.push(e.target.result);
-// photos.save();
-// inp = photos;
-// photoContainer.appendChild(im);
+  if (input.files && input.files[0]) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    function na(){
+      let im = document.createElement("logoPreview");
+      $('#logoPreview').attr("src", e.target.result)
+      $('#imgPreviewBox').show(300);
+    }
+    na();
+  }
+  reader.readAsDataURL(input.files[0]); // convert to base64 string
+  }
 }
-na();
-// console.log(e.target.result)
-}
-reader.readAsDataURL(input.files[0]); // convert to base64 string
-}
-}
+
 $("#img").change(function() {
 readURL(this);
 });
@@ -180,7 +161,6 @@ $('#editForm').click(()=> {
   $('#formID').css('pointer-events','all');
   $('#editForm').attr('disabled', true);
   toastr["success"]("Now you can edit the form");
-  // this.css('pointer-events','none')
 
 })
 </script>
