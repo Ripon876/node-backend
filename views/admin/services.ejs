@@ -9,7 +9,7 @@
               <div class="card">
                 <div class="card-body">
                 <div class="align-items-baseline d-flex justify-content-between">
-                <p class="card-title">Slider</p>
+                <p class="card-title">Services</p>
                 <div>
                    <button  id="editForm" class="btn btn-primary">Edit</button>
                   <a href="/services/new"  id="editForm" class="btn btn-primary">Add New</a>               
@@ -17,30 +17,17 @@
 
           </div>
         
-<div class="sliderForm py-5">
+<div class="serviceForm py-5">
   <form id="form" method="post" enctype="multipart/form-data">
-      <div class="align-items-center form-group row">
-            <div class="col-6">
-                   <label for="slide_duration">Slide Duration (ms)</label>
-                <input type="number" class="form-control" required name="slide_duration"  id="slide_duration" placeholder="Slide duration">
-            </div> 
-            <div class="col-6 px-5">
-                <label for="slide_duration">Axis</label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="axis" id="vertical"  >
-                  <label class="form-check-label" for="vertical">
-                   Vertical
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="axis" id="horizontal"  >
-                  <label class="form-check-label" for="horizontal">
-                   Horizontal
-                  </label>
-                </div>
-            </div> 
-      </div>
-      <div>
+         <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" value="<%= service.title %>" name="title"  id="title" placeholder="title">
+          </div>
+          <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control border"    name="short_description" id="short_description" rows="3" placeholder="description" maxlength="125"><%= service.short_description %></textarea>
+          </div>
+       <div>
           <button type="submit" id="submit" class="btn btn-primary">Save</button>
       </div>
   </form>
@@ -49,17 +36,17 @@
             
 
 
-<div id="slideEditForm"  class="py-5">
+<div id="serviceform"  class="py-5">
   
-    <form id="slideEdit"  method="post" enctype="multipart/form-data">
+    <form id="form"  method="post" enctype="multipart/form-data">
         <div class="form-group">
               <label for="title">Title</label>
-                <input type="text" class="form-control" required name="title"  id="title" placeholder="title">
+                <input type="text" class="form-control"  name="title"  id="title" placeholder="title">
               </div>
               <div class="d-flex form-group row">
                 <div class="col-lg-4 col-md-4">
                   <label for="img">Image</label>
-                  <input type="file"  style="border: none !important;" class="form-control" name="img" id="img">
+                  <input type="file"   style="border: none !important;" class="form-control" name="img" id="img">
                 </div>
                 <div id="imgPreviewBox" class="col col-lg-8 text-center" style="height: 500px;width: auto;margin: auto;overflow: scroll;position: relative;">
                   <img src=''   id="imgPreview"   class="img-fluid"style="left: 50%;transform: translate(-50%, 0);position: absolute;">
@@ -67,24 +54,25 @@
               </div>
               <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control border"  required name="description" id="description" rows="3" placeholder="description" maxlength="125"></textarea>
+                <textarea class="form-control border"   name="description" id="description" rows="5" placeholder="description" maxlength="125"></textarea>
               </div>
               <div class="form-group d-flex">
               <div  class="px-4 py-3">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="show_img_first"  id="show_img_first">
-                  <label class="form-check-label" for="show_img_first">
-                    Show Image First
+                  <input class="form-check-input" type="checkbox" name="show_content_first"  id="show_content_first">
+                  <label class="form-check-label" for="show_content_first">
+                    Show Content First
                   </label>
                 </div>
               </div>
 
               </div>
         <div>
-            <button type="submit" id="submit" class="btn btn-primary">Save</button>
+            <button type="submit" id="submit" class="btn btn-primary">Add</button>
         </div>
     </form>
 </div>
+
 
 
 
@@ -119,8 +107,8 @@
                               <td><h4><%= service.show_content_first ? 'Yes' : 'No' %></h4></td>
                               <td>
                                 <input type="text" value="<%= JSON.stringify(service) %>" class="d-none">
-                                <button class="btn btn-primary px-3 py-2 editSlide">Edit</button>
-                                <button class="btn btn-danger px-3 py-2 deleteSlide">Delete</button>
+                                <button class="btn btn-primary px-3 py-2 editService">Edit</button>
+                                <button class="btn btn-danger px-3 py-2 deleteService">Delete</button>
                               </td>
                           </tr>   
                        <%  }) %>
@@ -140,7 +128,8 @@
 
 
 <script type="text/javascript">
-  
+  $('.serviceForm').hide()
+  $('#serviceform').hide()
 
     function readURL(input) {
       if (input.files && input.files[0]) {
@@ -161,6 +150,71 @@
     });
 
 </script>
+
+<script>
+  $("#editForm").click(()=>{
+     $("#editForm").attr('disabled' ,true)
+    $('#serviceEditForm').show(300)
+  })
+</script>
+
+
+
+
+
+<script>
+  $('.serviceForm #form').submit((e)=>{
+    e.preventDefault();
+    var formdata = new FormData(document.getElementById('form'));
+    $.ajax({
+      type: 'PUT',
+      url: '/services',
+      data: formdata,
+      processData : false,
+      contentType: false,
+      success: function(res) {
+        if(res.status){
+               Swal.fire(
+          'Success',
+          'Settings updated',
+          'success'
+        ).then(()=> {
+            $('#editForm').attr('disabled', false);
+            $('.serviceForm #form #title').val(res.services.title)
+            $('.serviceForm #form #short_description').val(res.services.short_description)
+            $('.serviceForm').hide(300);
+        })
+        }
+      }
+    })
+  })
+</script>
+
+
+
+<script>
+  
+
+var service;
+var btn;
+
+  $(".editService").on('click',(e) => {
+      btn = e;
+      service =  JSON.parse(e.target.previousElementSibling.value);
+      $('#serviceform').show(300);
+      $('#serviceform #title').val(service.title);
+      $('#serviceform #imgPreview').attr('src',service.img);
+      $('#serviceform #description').val(service.description);
+      service.show_content_first ?   $('#show_content_first').attr('checked',true) :  $('#show_content_first').attr('checked',false);
+      $(window).scrollTop(0);
+
+
+
+  })
+
+ 
+</script>
+
 
 
 

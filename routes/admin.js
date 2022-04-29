@@ -290,16 +290,6 @@ router.post('/services',async(req,res)=> {
    }
 
 
-		// console.log(req.body)
-
-
-
-
-
-
-
-
-
  Services.find({},(err,services)=> {
 		if(err) res.status(501).json({err: "something went wrong"});
 
@@ -319,14 +309,25 @@ router.post('/services',async(req,res)=> {
 
 
 
-
-
-
-
 	}
 })
 
 
+
+router.put('/services',(req,res)=> {
+	if(req.body){
+		Services.find({},(err,services)=>{
+			if(err) res.status(501).json({err: "something went wrong"});
+     
+      Services.findOneAndUpdate(services[0]._id,req.body,{new: true},(err,newSrvc)=> {
+      	if(err) res.status(501).json({err: "something went wrong"});
+      	var {services,...rest} = newSrvc.toObject();
+           res.status(200).json({status : true,services : rest})
+      })
+
+		})
+	}
+})
 
 
 module.exports = router;
