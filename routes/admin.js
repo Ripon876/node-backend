@@ -15,7 +15,15 @@ var deleteFile = require("../helpers/deleteFile");
 var middlewares = require("../middlewares/middleware");
 
 
-//settings api edit
+
+
+
+
+  //===================// 
+ // settings api edit //
+//___________________//
+
+
 router.get('/settings',middlewares.isLoggedIn,(req,res) => {
 	Site_settings.find({},(err,data)=> {
 		if(err){
@@ -29,7 +37,7 @@ router.get('/settings',middlewares.isLoggedIn,(req,res) => {
 router.post('/settings',middlewares.isLoggedIn,async (req,res) => {
 
 	if(req.body){ 
-		
+
 		var fileName = req.body.logo || 'Logo';
 		var imgPath;
 		var link;
@@ -78,8 +86,9 @@ router.post('/settings',middlewares.isLoggedIn,async (req,res) => {
 
 
 
-
-// new slider route
+  //===================// 
+ //    slider route   //
+//___________________//
 
 router.get('/slider',middlewares.isLoggedIn,(req,res) => {
 
@@ -234,6 +243,88 @@ router.delete('/slider',middlewares.isLoggedIn,(req,res)=> {
 
 })
 
+
+
+  //===================// 
+ //  services route   //
+//___________________//
+
+
+
+router.get("/services",(req,res)=> {
+
+	Services.find({},(err,services)=> {
+		if(err) res.status(501).json({err: "something went wrong"});
+   
+   res.render('./admin/services',{service : services[0]})
+
+	})
+
+})
+
+
+router.get("/services/new",(req,res)=> {
+   res.render('./admin/newservice')
+
+})
+
+
+router.post('/services',async(req,res)=> {
+
+
+	  var serverURl = `${req.protocol}://${req.get('host')}`;
+		var fileName =  'service' + Math.floor(Math.random() * 10000);
+		var link = serverURl;
+
+		if (req.files) {
+			imgPath = await UploadFile(req.files.img,fileName,'services');
+			link += imgPath;
+		}
+
+   req.body.img =  link;
+	if(req.body){
+   if(req.body.show_content_first){
+   	req.body.show_content_first = true
+   }else{
+   	req.body.show_content_first = false
+   }
+
+
+		// console.log(req.body)
+
+
+
+
+
+
+
+
+
+ Services.find({},(err,services)=> {
+		if(err) res.status(501).json({err: "something went wrong"});
+
+	  Services.findById(services[0]._id,(err,services)=>{
+	  	if(err) res.status(501).json({err: "something went wrong"});
+ 			 services.services.push(req.body);
+ 			 services.save((err)=>{
+ 			 	if(err) res.status(501).json({err: "something went wrong"});
+
+					res.status(200).json({status: true})
+
+ 			 })
+
+	  })
+	    
+	})
+
+
+
+
+
+
+
+	}
+})
 
 
 

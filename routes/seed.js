@@ -171,7 +171,7 @@ var aboutseed = {
 var servicesseed = {
 	title :  'Services',
 	short_description :  'Pellentesque in ipsum id orci porta dapibus. Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus.',
-	srevices : [
+	services : [
 	{
 	img :  'http://localhost:3000/img/mobile.svg',
 	title :  'Mobile App Development',
@@ -201,10 +201,10 @@ var servicesseed = {
 
 // Services.collection.drop();
 
-//  Services.create(servicesseed,(err,ddfds) => {
-//     if(err) console.log(err);
-//     console.log(ddfds);
-//  });
+ // Services.create(servicesseed,(err,ddfds) => {
+ //    if(err) console.log(err);
+ //    console.log(ddfds);
+ // });
 
 
 // Services.find({},(err,dt) => { console.log(dt)})

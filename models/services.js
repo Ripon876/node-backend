@@ -12,7 +12,7 @@ const serviceSchema = new mongoose.Schema({
 const servicesSchema = new mongoose.Schema({
 	title :  String,
 	short_description :  String,
-	srevices : [serviceSchema]
+	services : [serviceSchema]
 })
 
 const Services = mongoose.model("Services",servicesSchema);

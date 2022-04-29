@@ -1,0 +1,111 @@
+<%- include("../../partials/admin-header") -%>
+<%- include("../../partials/admin-nav") -%>
+
+
+        <div class="content-wrapper p-5">
+         
+          <div class="row">
+            <div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                <div class="align-items-baseline d-flex justify-content-between">
+                <p class="card-title">New Service</p>
+                </div>
+
+<div id="serviceform"  class="py-5">
+  
+    <form id="form"  method="post" enctype="multipart/form-data">
+        <div class="form-group">
+              <label for="title">Title</label>
+                <input type="text" class="form-control" required name="title"  id="title" placeholder="title">
+              </div>
+              <div class="d-flex form-group row">
+                <div class="col-lg-4 col-md-4">
+                  <label for="img">Image</label>
+                  <input type="file" required  style="border: none !important;" class="form-control" name="img" id="img">
+                </div>
+                <div id="imgPreviewBox" class="col col-lg-8 text-center" style="height: 500px;width: auto;margin: auto;overflow: scroll;position: relative;">
+                  <img src=''   id="imgPreview"   class="img-fluid"style="left: 50%;transform: translate(-50%, 0);position: absolute;">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control border"  required name="description" id="description" rows="3" placeholder="description" maxlength="125"></textarea>
+              </div>
+              <div class="form-group d-flex">
+              <div  class="px-4 py-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="show_content_first"  id="show_content_first">
+                  <label class="form-check-label" for="show_content_first">
+                    Show Content First
+                  </label>
+                </div>
+              </div>
+
+              </div>
+        <div>
+            <button type="submit" id="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+</div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+<script type="text/javascript">
+  
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          function na(){
+            let im = document.createElement("logoPreview");
+            $('#imgPreview').attr("src", e.target.result)
+            $('#imgPreviewBox').show(300);
+          }
+          na();
+        }
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+      }
+    }
+    $("#img").change(function() {
+    readURL(this);
+    });
+
+</script>
+
+<script> 
+$('#serviceform #form').submit((e)=>{
+  e.preventDefault();
+  var formData = new FormData(document.getElementById('form'));
+  $.ajax({
+    type : 'POST',
+    url: '/services',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(res) {
+      if(res.status){
+       Swal.fire(
+          'Success',
+          'Service Added',
+          'success'
+        ).then(()=> {
+          window.location.href = "/services"
+        })
+      }
+    }
+  })
+})
+
+</script>
+
+<%- include("../../partials/admin-footer") -%>
