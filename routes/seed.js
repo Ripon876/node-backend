@@ -11,7 +11,7 @@ var Careers = require("../models/careers");
 var Interns = require("../models/interns");
 
 
-const DDSD = 'dsfdfdfds';
+const SEED = 'SeeD';
 
 
 
@@ -42,7 +42,7 @@ var sdfdsfdsfd = {
 
 
 
-var sdfd = {
+/*var sdfd = {
 	logo : "LOGO",
 	social_links :  {
 		fb : "fb",
@@ -55,6 +55,23 @@ var sdfd = {
 	email :  'sample@gmail.com',
 	number : '+1 5589 55488',
 	address : '14-15 No. Yea Khaja Bhaban, 1 No. Super Market, Mirpur-1,Dhaka-1216'
+}
+*/
+
+
+var sdfd = {
+	logo : "",
+	social_links :  {
+		fb : "",
+		twitter : '',
+		instagram : ''
+	},
+	description :  '',
+	keywords : '',
+	favicon :  '',
+	email :  '',
+	number : '',
+	address : ''
 }
 
 
@@ -78,7 +95,7 @@ var sdfd = {
 
 
 
-var sliderseed = {
+/*var sliderseed = {
 	slides : [
 	{
 	title : "sample title 1",
@@ -109,7 +126,17 @@ var sliderseed = {
 	total_slides :  3,
 	slide_duration : 1500,
 	axis : 'x'
+}*/
+
+
+var sliderseed = {
+	slides : [],
+	total_slides :  0,
+	slide_duration : 1500,
+	axis : 'x'
 }
+
+
 
 // Slider.collection.drop();
 
@@ -168,36 +195,57 @@ var aboutseed = {
 
 
 
-var servicesseed = {
+/*var servicesseed = {
 	title :  'Services',
 	short_description :  'Pellentesque in ipsum id orci porta dapibus. Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus.',
 	services : [
 	{
-	img :  'http://localhost:3000/img/mobile.svg',
+	img :  'http://localhost:5000/uploads/services/mobile.svg',
 	title :  'Mobile App Development',
 	description : 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta.Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque',
 	show_content_first : false
 	},
 	{
-	img :  'http://localhost:3000/img/pc.svg',
+	img :  'http://localhost:5000/uploads/services/pc.svg',
 	title :  'Software Development',
 	description : 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta.Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque',
 	show_content_first : true
 	},
 	{
-	img :  'http://localhost:3000/img/marketing.svg',
+	img :  'http://localhost:5000/uploads/services/marketing.svg',
 	title :  'Digital Marketing',
 	description : 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta.Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque',
 	show_content_first : false
 	},
 	{
-	img :  'http://localhost:3000/img/graphics.svg',
+	img :  'http://localhost:5000/uploads/services/graphics.svg',
 	title :  'Graphic Design',
 	description : 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta.Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque',
 	show_content_first : true
 	}
 	]
 }
+*/
+
+
+
+var servicesseed = {
+	title :  '',
+	short_description :  '',
+	services : []
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Services.collection.drop();
 
@@ -335,7 +383,7 @@ var internseed = {
 
 
 
-
+console.log("called")
 
 
 
@@ -343,7 +391,7 @@ var internseed = {
 // const s = () => { console.log("from the seed file") };
 // s()
 
-module.exports = DDSD;
+module.exports = SEED;
 
 
 

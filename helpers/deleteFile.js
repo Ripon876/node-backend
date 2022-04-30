@@ -3,11 +3,22 @@ const path = require("path");
 
 
 
-const deleteFile  = (filename) => {
+const deleteFile  = (fileName,folderName) => {
 	var errMsg;
-	fs.unlink(path.join(__dirname, '../public/uploads/', filename))
+	var filepath = path.join(__dirname, '../public/uploads/', fileName);
+	if(folderName){
+	   	 filepath = path.join(__dirname, '../public/uploads/',folderName, fileName);
+	}
+
+
+
+	fs.unlink(filepath)
 	.then((err) => {
-      if(err) errMsg = err;
+      if(err){
+      	errMsg = err;
+      	console.log(err)
+      } 
+
 	})
 
 if(errMsg != undefined){

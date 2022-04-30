@@ -11,9 +11,6 @@ var Messages = require("../models/messages");
 var Careers = require("../models/careers");
 var Interns = require("../models/interns");
 
-var DDSD = require('./seed'); // sample seed file
-
-
 // site settings api
 router.get("/site_settings",(req,res) => {
 	Site_settings.find({},(err,Settings) => {

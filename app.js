@@ -30,9 +30,16 @@ var {
 } = require("socket.io");
 var io = new Server(server);
 var port = process.env.PORT || 5000;
+
+
+
+
+var SEED  = require("./routes/SEED");
 var login  = require("./routes/login");
 var apis  = require("./routes/apis");
-var admin  = require("./routes/admin");
+var settings  = require("./routes/settings");
+var slider  = require("./routes/slider");
+var services  = require("./routes/services");
 
 var mongoDbStr;
 
@@ -93,7 +100,9 @@ passport.deserializeUser(function(obj, cb) {
 
 app.use(login);
 app.use("/api", apis);
-app.use(admin);
+app.use(slider);
+app.use(settings);
+app.use(services);
 
 
 app.get('/',(req,res) => {
@@ -108,6 +117,22 @@ app.get('/admin',middlewares.isLoggedIn,(req,res) => {
 	res.render("login" , {title :  "MD Ripon islam"})
 })
 */
+
+
+
+app.get('/ripon',(req,res)=> {
+  
+})
+
+
+
+
+
+
+
+
+
+
 
 app.listen(port, () => {
 	console.log("server started ar port 5000")
