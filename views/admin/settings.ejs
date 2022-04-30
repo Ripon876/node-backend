@@ -91,6 +91,7 @@ if(parsed_data.logo.includes('/')){
 
 
 $('#formID').css('pointer-events','none');
+$('#formID').css('opacity','0.5');
 // Swal.fire({
 // title: 'Are you sure?',
 // text: "You won't be able to revert this!",
@@ -159,6 +160,7 @@ readURL(this);
 });
 $('#editForm').click(()=> {
   $('#formID').css('pointer-events','all');
+  $('#formID').css('opacity','1');
   $('#editForm').attr('disabled', true);
   toastr["success"]("Now you can edit the form");
 

@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
-var Slider = require("../models/slides");
 var Services = require("../models/services");
 var UploadFile = require("../helpers/fileUpload");
 var deleteFile = require("../helpers/deleteFile");

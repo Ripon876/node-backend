@@ -39,6 +39,7 @@ var login  = require("./routes/login");
 var apis  = require("./routes/apis");
 var settings  = require("./routes/settings");
 var slider  = require("./routes/slider");
+var about  = require("./routes/about");
 var services  = require("./routes/services");
 
 var mongoDbStr;
@@ -101,6 +102,7 @@ passport.deserializeUser(function(obj, cb) {
 app.use(login);
 app.use("/api", apis);
 app.use(slider);
+app.use(about);
 app.use(settings);
 app.use(services);
 
