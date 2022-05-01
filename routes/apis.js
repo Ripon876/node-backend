@@ -133,16 +133,17 @@ router.get("/careers",(req,res) => {
 })
 
 
-router.get('/careers/:title',(req,res) => {
-  var title = req.params.title.replace(/_/g,' ')
+router.get('/careers/:link',(req,res) => {
+  var link = req.params.link;
    
-   if(title){
+   if(link){
     Careers.find({},(err,data) => {
       if(err || data === []){
         res.status(400).json({err: "something went wrong"});
       }else{
 
-    var opening =   data[0].openings.find((obj) => obj.title === title )
+    var opening =   data[0].openings.find((obj) => obj.link === link )
+ 
     res.status(200).json(opening)
       }
     })

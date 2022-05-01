@@ -9,10 +9,10 @@
               <div class="card">
                 <div class="card-body">
                 <div class="align-items-baseline d-flex justify-content-between">
-                        <p class="card-title">About</p>
+                        <p class="card-title">Career</p>
                         <div>
                            <button  id="editForm" class="btn btn-primary">Edit</button>
-                          <a href="/about/benefits/new"   class="btn btn-primary">Add New</a>               
+                          <a href="/career/openings/new"   class="btn btn-primary">Add New</a>               
                         </div>
 
                   </div>
@@ -88,11 +88,10 @@
                           <tr>
                               <td><h4><%= career.title %></h4></td> 
                               <td><h4><%= career.designation %></h4></td> 
-                              <td><h4><%= career.form_link.substring(0,20) %></h4></td> 
+                              <td><h4><%= career.form_link ?  career.form_link.substring(0,20)  : 'Default Form' %></h4></td> 
                               <td class="text-center">
                                 <input type="text" value="<%= JSON.stringify(career) %>" class="d-none">
-                                <button class="btn btn-primary px-3 py-2 editBenefit">Edit</button>
-                                <button class="btn btn-danger px-3 py-2 deleteBenefit">Delete</button>
+                                <button class="btn btn-danger px-3 py-2 deleteOpening">Delete</button>
                               </td>
                           </tr>   
                        <%  }) %>
@@ -122,8 +121,6 @@
       $("#editForm").attr('disabled' ,true)
      $('.careerHeadings').show(300);
   })
-
-
 
 
 
@@ -158,95 +155,10 @@
 
 
 
-
-
-
-
-<script>
-  
-
-var benefit;
-var btn;
-
-  $(".editBenefit").on('click',(e) => {
-      btn = e;
-      benefit =  JSON.parse(e.target.previousElementSibling.value);
-      $('#careerForm').show(300);
-      $('#careerForm #title').val(benefit.title);
-      $('#careerForm #imgPreview').attr('src',benefit.img);
-      $('#careerForm #description').val(benefit.description);
-
-      $(window).scrollTop(0);
-
-  })
-
- 
-</script>
-
-
-<script>
-   $('#careerForm form').submit((e)=> {
-    e.preventDefault();
-  
-  var formData = new FormData(document.getElementById('openingEditForm'))
-
-
-  formData.append("oldData",JSON.stringify(benefit) );
-
-// handle service item edit
-$.ajax({
-  type: 'PUT',
-  url : '/about/benefits',
-  data : formData,
-  processData: false,
-  contentType: false,
-  success : function(res) {
-    if(res.status){
- 
-       Swal.fire(
-          'Success',
-          'Settings updated',
-          'success'
-        ).then(()=> {
-          $('#careerForm').hide(300);
-          $('#careerForm #title').val('');
-          $('#careerForm #imgPreview').attr('src','');
-          $('#careerForm #description').val('');
-          
-        })
-        .then(() =>{
-            updateService(btn,res.benefit)
-        })
-    }
-  },
-  error : function(err) {
-    console.log(err);
-  }
-})
-
-  })
-</script>
-
-
-
-<script>
-  function updateService(e,benefit) {
-
-    e.target.previousElementSibling.value = JSON.stringify(benefit);
-    var title = e.target.parentElement.previousElementSibling.children[0];
-    var img = e.target.parentElement.previousElementSibling.previousElementSibling.children[0];
-  
-    img.src = benefit.img;
-    title.textContent = benefit.title;
-
-  }
-</script>
-
-
 <script>
  
-  $('.deleteBenefit').click((e)=> {
-   var benefit =JSON.parse(e.target.previousElementSibling.previousElementSibling.value);
+  $('.deleteOpening').click((e)=> {
+   var opening =JSON.parse(e.target.previousElementSibling.value);
 
 
 Swal.fire({
@@ -262,8 +174,8 @@ Swal.fire({
 
       $.ajax({
         type: 'DELETE',
-        url : '/about/benefits',
-        data : benefit,
+        url : '/career/openings',
+        data : opening,
         success :  function(res){
           if(res.status){
              Swal.fire(

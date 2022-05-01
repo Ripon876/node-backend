@@ -310,7 +310,7 @@ var weofferseed = {
 // WeOffer.find({},(err,dt) => { console.log(dt)})
 
 
-
+/*
 var careerseed = {
 	title : 'JOIN US',
 	description : 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Sed porttitor lectus nibh. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus.',
@@ -319,17 +319,25 @@ var careerseed = {
   title : 'Software Development Lead',
 	designation : 'Engineering',
 	description : '<div class="requirements"><div class="job-feature-title"><h5>Major Duties &amp; Responsibilities</h5></div><ul><li>Design, code, test and implement according to software design specifications following standard coding styles and practices.</li><li>Analyze the requirements and understand the deliverables.</li><li>Develop software solutions by studying information needs, systems flow, data usage, and work processes.</li><li>Document and demonstrate solutions by developing documentation, flowcharts, layouts, diagrams, charts, code comments and clear code.</li><li>Participate in code/design reviews after investigating current software development projects.</li><li>Seek out new technologies and ideas to add value to project.</li><li>Collaborate with team members and ensure knowledge transfer.</li></ul></div>',
-	form_link : 'https://docs.google.com/forms/d/e/1FAIpQLSeI8_vYyaJgM7SJM4Y9AWfLq-tglWZh6yt7bEXEOJr_L-hV1A/viewform?formkey=dGx0b1ZrTnoyZDgtYXItMWVBdVlQQWc6MQ'
+	form_link : 'https://docs.google.com/forms/d/e/1FAIpQLSeI8_vYyaJgM7SJM4Y9AWfLq-tglWZh6yt7bEXEOJr_L-hV1A/viewform?formkey=dGx0b1ZrTnoyZDgtYXItMWVBdVlQQWc6MQ',
+  link:'Software_Development_Lead_45334'
   },
   {
   title : 'Software Engineer',
 	designation : 'Engineering',
 	description : '<div class="requirements"><div class="job-feature-title"><h5>Major Duties &amp; Responsibilities</h5></div><ul><li>Design, code, test and implement according to software design specifications following standard coding styles and practices.</li><li>Analyze the requirements and understand the deliverables.</li><li>Develop software solutions by studying information needs, systems flow, data usage, and work processes.</li><li>Document and demonstrate solutions by developing documentation, flowcharts, layouts, diagrams, charts, code comments and clear code.</li><li>Participate in code/design reviews after investigating current software development projects.</li><li>Seek out new technologies and ideas to add value to project.</li><li>Collaborate with team members and ensure knowledge transfer.</li></ul></div>',
-	form_link : ''
+	form_link : '',
+	link: 'Software_Engineer_34525'
   }
 	]
 }
+*/
 
+var careerseed = {
+	title : '',
+	description : '',
+	openings : []
+}
 
 
 // Careers.collection.drop();

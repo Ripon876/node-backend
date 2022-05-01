@@ -1,0 +1,131 @@
+<%- include("../../partials/admin-header") -%>
+<%- include("../../partials/admin-nav") -%>
+
+
+        <div class="content-wrapper p-5">
+         
+          <div class="row">
+            <div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                <div class="align-items-baseline d-flex justify-content-between">
+                <p class="card-title">New Opening</p>
+                </div>
+
+<div id="newopeningform"  class="py-5">
+  
+    <form id="form"  method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="title">Title</label>
+                  <input type="text" class="form-control" required name="title"  id="title" placeholder="title">
+              </div>
+              <div class="form-group">
+                <label for="title">Position</label>
+                  <input type="text" class="form-control" required name="designation"  id="designation" placeholder="position">
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control border" name="description"    id="description" rows="7"  required placeholder="description" ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="title">Form Link</label>
+                  <input type="text" class="form-control"  name="form_link"  id="form_link" placeholder="form link" title="leave this blank if you want to use default form">
+              </div>
+        <div>
+            <button type="submit" id="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+</div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+<!-- 
+ <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+ -->
+
+
+
+<script>
+   /*   tinymce.init({
+        selector: '#mytextarea',
+        plugins: [
+          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+        ],
+        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+          'alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+      });*/
+    </script>
+
+
+<script>
+
+</script>
+
+
+<script type="text/javascript">
+  
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          function na(){
+            let im = document.createElement("logoPreview");
+            $('#imgPreview').attr("src", e.target.result)
+            $('#imgPreviewBox').show(300);
+          }
+          na();
+        }
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+      }
+    }
+    $("#img").change(function() {
+    readURL(this);
+    });
+
+</script>
+
+<script> 
+$('#newopeningform #form').submit((e)=>{
+  e.preventDefault();
+/*  var description ;
+  tinymce.activeEditor.on('GetContent', function(e) {
+     description = e.content;
+   });
+*/
+
+  var formData = new FormData(document.getElementById('form'));
+  $.ajax({
+    type : 'POST',
+    url: '/career/openings/new',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(res) {
+      if(res.status){
+       Swal.fire(
+          'Success',
+          'Opening Added',
+          'success'
+        ).then(()=> {
+          window.location.href = "/career"
+        })
+      }
+    }
+  })
+})
+
+</script>
+
+<%- include("../../partials/admin-footer") -%>
