@@ -148,9 +148,7 @@ var sliderseed = {
 
 // Slider.find({},(err,dt) => { console.log(dt)})
 
-
-
-
+/*
 var aboutseed = {
 	title : 'About',
 	short_description : 'Pellentesque in ipsum id orci porta dapibus. Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus.',
@@ -178,14 +176,25 @@ var aboutseed = {
 	  description : 'Proin eget tortor risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
 	}
 	]
+}*/
+
+
+
+
+var aboutseed = {
+	title : '',
+	short_description : '',
+	long_descrition : '',
+	img : '',
+	benefits : []
 }
 
 // About.collection.drop();
 
-//  About.create(aboutseed,(err,ddfds) => {
-//     if(err) console.log(err);
-//     console.log(ddfds);
-//  });
+ // About.create(aboutseed,(err,ddfds) => {
+ //    if(err) console.log(err);
+ //    console.log(ddfds);
+ // });
 
 
 // About.find({},(err,dt) => { console.log(dt)})
