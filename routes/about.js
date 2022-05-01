@@ -62,13 +62,48 @@ router.get('/about/benefits/new',(req,res)=> {
 	res.render('./admin/newbenefit');
 })
 
-router.post('/about/benefits/new',(req,res)=> {
+router.post('/about/benefits/new',async (req,res)=> {
+
+
 	if(req.body){
-		console.log(req.body)
+
+
+
+	var serverURl = `${req.protocol}://${req.get('host')}`;
+   var fileName =  'benefit' + Math.floor(Math.random() * 10000);
+	var link = serverURl;
+
+	if (req.files) {
+		imgPath = await UploadFile(req.files.img,fileName,'benefits');
+		link += imgPath;
+	}
+
+
+
+ req.body.img =  link;
+
+
+
+
+ About.find({},(err,about)=> {
+		if(err) res.status(501).json({err: "something went wrong"});
+
+	  About.findById(about[0]._id,(err,about)=>{
+	  	if(err) res.status(501).json({err: "something went wrong"});
+ 			 about.benefits.push(req.body);
+ 			 about.save((err)=>{
+ 			 	if(err) res.status(501).json({err: "something went wrong"});
+       
+					res.status(200).json({status: true})
+
+ 			 })
+
+	  })
+	    
+	})
+
 	}
 })
-
-
 
 
 

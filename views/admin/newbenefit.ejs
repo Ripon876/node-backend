@@ -12,7 +12,7 @@
                 <p class="card-title">New Service</p>
                 </div>
 
-<div id="serviceform"  class="py-5">
+<div id="newbenefitform"  class="py-5">
   
     <form id="form"  method="post" enctype="multipart/form-data">
         <div class="form-group">
@@ -31,17 +31,6 @@
               <div class="form-group">
                 <label for="description">Description</label>
                 <textarea class="form-control border"  required name="description" id="description" rows="3" placeholder="description" maxlength="125"></textarea>
-              </div>
-              <div class="form-group d-flex">
-              <div  class="px-4 py-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="show_content_first"  id="show_content_first">
-                  <label class="form-check-label" for="show_content_first">
-                    Show Content First
-                  </label>
-                </div>
-              </div>
-
               </div>
         <div>
             <button type="submit" id="submit" class="btn btn-primary">Add</button>
@@ -83,12 +72,12 @@
 </script>
 
 <script> 
-$('#serviceform #form').submit((e)=>{
+$('#newbenefitform #form').submit((e)=>{
   e.preventDefault();
   var formData = new FormData(document.getElementById('form'));
   $.ajax({
     type : 'POST',
-    url: '/services',
+    url: '/about/benefits/new',
     data: formData,
     processData: false,
     contentType: false,
@@ -96,10 +85,10 @@ $('#serviceform #form').submit((e)=>{
       if(res.status){
        Swal.fire(
           'Success',
-          'Service Added',
+          'Benefit Added',
           'success'
         ).then(()=> {
-          window.location.href = "/services"
+          window.location.href = "/about"
         })
       }
     }

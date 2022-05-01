@@ -36,14 +36,14 @@ router.get("/services/new",middlewares.isLoggedIn,(req,res)=> {
 router.post('/services',async(req,res)=> {
 
 
-	  var serverURl = `${req.protocol}://${req.get('host')}`;
-		var fileName =  'service' + Math.floor(Math.random() * 10000);
-		var link = serverURl;
+	var serverURl = `${req.protocol}://${req.get('host')}`;
+    var fileName =  'service' + Math.floor(Math.random() * 10000);
+	var link = serverURl;
 
-		if (req.files) {
-			imgPath = await UploadFile(req.files.img,fileName,'services');
-			link += imgPath;
-		}
+	if (req.files) {
+		imgPath = await UploadFile(req.files.img,fileName,'services');
+		link += imgPath;
+	}
 
    req.body.img =  link;
 	if(req.body){
