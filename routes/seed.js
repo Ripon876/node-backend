@@ -314,7 +314,6 @@ var weofferseed = {
 var careerseed = {
 	title : 'JOIN US',
 	description : 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Sed porttitor lectus nibh. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus.',
-	openingsTitle : 'CURRENT OPENINGS',
 	openings : [
   {
   title : 'Software Development Lead',

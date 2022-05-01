@@ -41,6 +41,7 @@ var settings  = require("./routes/settings");
 var slider  = require("./routes/slider");
 var about  = require("./routes/about");
 var services  = require("./routes/services");
+var career  = require("./routes/career");
 
 var mongoDbStr;
 
@@ -105,6 +106,7 @@ app.use(slider);
 app.use(about);
 app.use(settings);
 app.use(services);
+app.use(career);
 
 
 app.get('/',(req,res) => {

@@ -10,7 +10,6 @@ var openingSchema =  new mongoose.Schema({
 var careerSchema = new mongoose.Schema({
 	title : String,
 	description : String,
-	openingsTitle : String,
 	openings : [openingSchema]
 })
 
