@@ -54,7 +54,9 @@ router.put('/about',middlewares.isLoggedIn,async (req,res) => {
 
 
 
-  }
+  }else{
+		res.status(405).json({err: "Method Not Allowed"});
+	}
 })
 
 
@@ -102,6 +104,8 @@ router.post('/about/benefits/new',middlewares.isLoggedIn,async (req,res)=> {
 	    
 	})
 
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
 	}
 })
 
@@ -161,7 +165,9 @@ router.put("/about/benefits",middlewares.isLoggedIn,async (req,res)=> {
 
 
 
-		 }
+		 }else{
+		res.status(405).json({err: "Method Not Allowed"});
+	}
 
 })
 
@@ -193,6 +199,8 @@ router.delete('/about/benefits',middlewares.isLoggedIn,async (req,res)=> {
 		   })
 	   })
 
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
 	}
 
 })

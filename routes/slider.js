@@ -35,6 +35,8 @@ router.post('/slider',middlewares.isLoggedIn,(req,res) => {
 			})
 			
 		})
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
 	}
 })
 
@@ -80,7 +82,9 @@ router.post("/slider/slides",middlewares.isLoggedIn,async (req,res)=> {
 				 })
 
 			})
-  }
+  }else{
+		res.status(405).json({err: "Method Not Allowed"});
+	}
 
 })
 
@@ -134,7 +138,9 @@ router.put('/slider',middlewares.isLoggedIn,async (req,res) => {
 			   })
 
 		  })
-		 }
+		 }else{
+				res.status(405).json({err: "Method Not Allowed"});
+	   }
 
 })
 
@@ -163,6 +169,8 @@ router.delete('/slider',middlewares.isLoggedIn,(req,res)=> {
 		    
 		   })
 	   })
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
 	}
 
 })

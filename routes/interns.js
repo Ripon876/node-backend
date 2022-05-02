@@ -68,13 +68,31 @@ router.post('/interns/new',middlewares.isLoggedIn,async (req,res)=> {
 
 	
 		
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
 	}
 })
 
 
 
 
+router.delete("/interns",middlewares.isLoggedIn,(req,res)=> {
 
+	if(req.body){
+	Interns.findByIdAndDelete(req.body._id, function (err, docs) {
+	     if(err) res.status(501).json({err: "something went wrong"});
+	     if(deleteFile(getImgName(req.body.img),'interns')){
+	     		res.status(200).json({status:  true})
+	     }else{
+	     		res.status(501).json({err: "something went wrong"});
+	     }
+	});
+
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
+	}
+
+})
 
 
 

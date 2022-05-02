@@ -80,6 +80,8 @@ router.post('/settings',middlewares.isLoggedIn,async (req,res) => {
 
 		})
 		}
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
 	}
 
 })

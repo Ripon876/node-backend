@@ -35,6 +35,7 @@ router.get("/services/new",middlewares.isLoggedIn,(req,res)=> {
 
 router.post('/services',async(req,res)=> {
 
+if(req.body){
 
 	var serverURl = `${req.protocol}://${req.get('host')}`;
     var fileName =  'service' + Math.floor(Math.random() * 10000);
@@ -73,7 +74,13 @@ router.post('/services',async(req,res)=> {
 
 
 
-	}
+	} 
+
+}else{
+	res.status(405).json({err: "Method Not Allowed"});
+}
+
+
 })
 
 
@@ -89,6 +96,8 @@ router.put('/services',middlewares.isLoggedIn,(req,res)=> {
       })
 
 		})
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
 	}
 })
 
@@ -147,7 +156,9 @@ router.put('/services/service',middlewares.isLoggedIn,async (req,res) => {
 
 
 
-		 }
+		}else{
+			res.status(405).json({err: "Method Not Allowed"});
+	    }
 
 })
 
@@ -178,6 +189,8 @@ router.delete('/services',middlewares.isLoggedIn,(req,res)=> {
 		    
 		   })
 	   })
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
 	}
 
 })

@@ -35,7 +35,9 @@ router.put('/career',middlewares.isLoggedIn,(req,res)=> {
 
 	})
 
- }
+ }else{
+		res.status(405).json({err: "Method Not Allowed"});
+	}
   
 })
 
@@ -68,6 +70,8 @@ router.post('/career/openings/new',middlewares.isLoggedIn,(req,res)=> {
 			    
 	    })
 
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
 	}
 })
 
@@ -97,6 +101,8 @@ router.delete('/career/openings',middlewares.isLoggedIn,(req,res)=> {
 	   })
 
 
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
 	}
 })
 
