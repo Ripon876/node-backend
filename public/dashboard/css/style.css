@@ -21169,19 +21169,19 @@ dl li {
   color: inherit;
 }
 
-.sidebar .nav .nav-item .nav-link i.menu-icon {
+.sidebar .nav .nav-item .nav-link i.mdi {
   font-size: 1.125rem;
   line-height: 1;
   margin-right: 1.125rem;
   color: white;
 }
 
-.rtl .sidebar .nav .nav-item .nav-link i.menu-icon {
+.rtl .sidebar .nav .nav-item .nav-link i.mdi {
   margin-left: 2rem;
   margin-right: 0;
 }
 
-.sidebar .nav .nav-item .nav-link i.menu-icon:before {
+.sidebar .nav .nav-item .nav-link i.mdi:before {
   vertical-align: middle;
 }
 
