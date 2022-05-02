@@ -67,7 +67,6 @@ function readURL(input) {
   var reader = new FileReader();
   reader.onload = function(e) {
     function na(){
-      let im = document.createElement("logoPreview");
       $('#logoPreview').attr("src", e.target.result)
       $('#imgPreviewBox').show(300);
     }

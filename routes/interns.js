@@ -26,12 +26,12 @@ router.get('/interns/new',middlewares.isLoggedIn,(req,res)=> {
 
 router.post('/interns/new',middlewares.isLoggedIn,async (req,res)=> {
 	if(req.body){
-			var months = Math.abs(req.body.e_date.split('-')[1] - req.body.s_date.split('-')[1]);
+		var months = Math.abs(req.body.e_date.split('-')[1] - req.body.s_date.split('-')[1]);
 	    var sm = getMonth(req.body.s_date)
 	    var em = getMonth(req.body.e_date)
 	    var duration = `Duration: ${months} Month (${sm} - ${em})`;
 	    var serverURl = `${req.protocol}://${req.get('host')}`;
-      var fileName =  'intern' + Math.floor(Math.random() * 10000);
+        var fileName =  'intern' + Math.floor(Math.random() * 10000);
 	    var link = serverURl;
 
 	    

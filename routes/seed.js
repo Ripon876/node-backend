@@ -21,16 +21,16 @@ const SEED = 'SeeD';
 
 
 var sdfdsfdsfd = {
-  clients : ["http://localhost:3000/img/c1.png",'http://localhost:3000/img/c1.png','http://localhost:3000/img/c1.png','http://localhost:3000/img/c1.png','http://localhost:3000/img/c1.png','http://localhost:3000/img/c1.png']
+  clients : []
 }
 
  // Clients.collection.drop();
 
-//  Clients.create(sdfdsfdsfd,(err,ddfds) => {
-//     if(err) console.log(err);
+ // Clients.create(sdfdsfdsfd,(err,ddfds) => {
+ //    if(err) console.log(err);
    
-//     console.log(ddfds);
-//  });
+ //    console.log(ddfds);
+ // });
 
 
 // Clients.find({},(err,dt) => { console.log(dt)})
