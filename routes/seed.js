@@ -366,16 +366,7 @@ var internseed = {
 		linkedIn : "",
   },
   img: "http://localhost:5000/uploads/interns/intern.png",
-	projects : [
-  {
-  	title :  "A2 Series",
-	  url : 'a2series.com'
-  },
-  {
-  	title :  "Sourceround",
-	  url : 'sourceround.com'
-  }
-	]
+	projects : []
 }
 
 // Interns.collection.drop();

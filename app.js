@@ -43,6 +43,7 @@ var about  = require("./routes/about");
 var services  = require("./routes/services");
 var career  = require("./routes/career");
 var interns  = require("./routes/interns");
+var clients  = require("./routes/clients");
 
 var mongoDbStr;
 
@@ -106,6 +107,7 @@ app.use(settings);
 app.use(services);
 app.use(career);
 app.use(interns);
+app.use(clients);
 
 
 app.get('/',(req,res) => {

@@ -1,0 +1,115 @@
+<%- include("../../partials/admin-header") -%>
+<%- include("../../partials/admin-nav") -%>
+
+
+        <div class="content-wrapper p-5">
+          <div class="row">
+            <div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Clients</p>
+
+                   <div class="row">
+                     
+                      <% if( clients){ %>
+                        <% clients.forEach((client)=> { %>
+                            <div class="col-2 pb-2">
+                               <img src="<%= client %>" class="img-fluid" />
+                               <div>
+                                 <button class="btn btn-danger btn-sm deleteClient">Remove</button>
+                               </div>
+                            </div>      
+                        <% }) %>
+                      <% } %>
+                   </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+<script type="text/javascript">
+  
+/*Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result)=> {
+  console.log(result)
+})
+
+*/
+
+
+function showToast(){
+   toastr["success"]("ripon", "Ripon");
+   toastr["error"]("ripon", "Ripon");
+   toastr["warning"]("ripon", "Ripon");
+   toastr["info"]("ripon", "Ripon");
+}
+
+
+
+
+
+</script>
+
+<script>
+ 
+  $('.deleteClient').click((e)=> {
+   var img = e.target.parentElement.previousElementSibling.src;
+
+Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result)=> {
+   if(result.isConfirmed){
+
+      $.ajax({
+        type: 'DELETE',
+        url : '/clients',
+        data : {img : img},
+        success :  function(res){
+          if(res.status){
+             Swal.fire(
+          'Success',
+           res.msg,
+          'success'
+        ).then(()=> {
+
+            e.target.parentElement.parentElement.remove();
+
+        })
+          
+          }
+        },
+        error : function(err){
+          Swal.fire(
+              'Error',
+              'Something went wrong',
+              'error'
+            )
+        }
+      })
+
+   }
+})
+
+
+
+  })
+</script>
+
+<%- include("../../partials/admin-footer") -%>

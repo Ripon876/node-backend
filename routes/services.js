@@ -145,7 +145,6 @@ router.put('/services/service',middlewares.isLoggedIn,async (req,res) => {
 				     var serviceIndex = services.services.findIndex(o => o.title === JSON.parse(oldData).title && o.img === JSON.parse(oldData).img);
 					 
 					   services.services[serviceIndex] = newData;
-					   console.log(services.services[serviceIndex])
 					   services.save((err,service)=> {
 					   		if(err) res.status(501).json({err: "something went wrong"});
 						      	res.status(200).json({status :  true,service : services.services[serviceIndex]});
