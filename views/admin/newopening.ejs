@@ -81,7 +81,6 @@
         var reader = new FileReader();
         reader.onload = function(e) {
           function na(){
-            let im = document.createElement("logoPreview");
             $('#imgPreview').attr("src", e.target.result)
             $('#imgPreviewBox').show(300);
           }
@@ -122,6 +121,13 @@ $('#newopeningform #form').submit((e)=>{
           window.location.href = "/career"
         })
       }
+    },
+    error : function(err){
+      Swal.fire(
+          'Error',
+          'Something went wrong',
+          'error'
+        )
     }
   })
 })

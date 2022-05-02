@@ -42,14 +42,12 @@ var slider  = require("./routes/slider");
 var about  = require("./routes/about");
 var services  = require("./routes/services");
 var career  = require("./routes/career");
+var interns  = require("./routes/interns");
 
 var mongoDbStr;
 
 app.use(cors())
-
 app.set("view engine", "ejs");
-
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({
   extended: true
@@ -107,6 +105,7 @@ app.use(about);
 app.use(settings);
 app.use(services);
 app.use(career);
+app.use(interns);
 
 
 app.get('/',(req,res) => {

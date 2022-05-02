@@ -1,0 +1,219 @@
+<%- include("../../partials/admin-header") -%>
+<%- include("../../partials/admin-nav") -%>
+
+
+        <div class="content-wrapper p-5">
+         
+          <div class="row">
+            <div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                <div class="align-items-baseline d-flex justify-content-between">
+                <p class="card-title">New Intern</p>
+                </div>
+
+
+  
+
+              <div class="newIntern py-5">
+                      <form id="form" method="post" enctype="multipart/form-data">
+                             <div class="form-group">
+                                  <label for="name">Name</label>
+                                  <input type="text" class="form-control"  name="name"  id="name" placeholder="name">
+                              </div>
+                              <div class="form-group">
+                                  <label for="position">Position</label>
+                                  <input type="text" class="form-control"  name="position"  id="position" placeholder="Position">
+                              </div>
+                            <div class="d-flex form-group row">
+                              <div class="col-lg-4 col-md-4">
+                                <label for="img">Image</label>
+                                <input type="file" style="border: none !important;" class="form-control" name="img" id="img">
+                              </div>
+                              <div id="imgPreviewBox" class="col col-lg-8 text-center" style="height: 500px;width: auto;margin: auto;overflow: scroll;position: relative;">
+                                <img src=''   id="logoPreview"   class="img-fluid"style="left: 50%;transform: translate(-50%, 0);position: absolute;">
+                              </div>
+                            </div>
+                              <div class="form-group">
+                                  <label for="description">Description</label>
+                                  <textarea class="form-control border"    name="description" id="description" rows="10" placeholder="description" maxlength="530"></textarea>
+                              </div>
+                              <div class="form-group">
+                                <label for="description">Duration</label>
+                                <div class=" d-flex"> 
+                                <div class="w-50 pr-3">
+                                    <label for="s_date">Starting Date</label>
+                                  <input type="date" class="form-control"  name="s_date" id="s_date" >
+                                </div>
+                                <div class="w-50 pl-3">
+                                   <label for="e_date">End Date</label>
+                                  <input type="date" class="form-control"  name="e_date" id="e_date" > 
+                                </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                    <label for="description">Projects</label>
+                                    <div class="d-flex" style="gap: 55px;">
+                                      <input type="text" placeholder="https://a2series.com" class="form-control"  id="projecturl" >
+                                       <button class="addProject btn btn-primary  px-5" type="button" >Add</button>
+                                    </div>
+                                   <div class="projectpreview">
+                                     <div class="row justify-content-center">
+                                      
+                                     </div>
+                                   </div>   
+                              </div>
+
+                              <div class="form-group w-75">
+                                <label for="description">Social Links</label>
+                                <div class="form-group">
+                                  <label for="fb">Facebook</label>
+                                  <input type="text" class="form-control"  name="fb" id="fb" placeholder="https://facebook.com">
+                                </div>
+                                <div class="form-group">
+                                  <label for="instagram">Instagram</label>
+                                  <input type="text" class="form-control" name="instagram" id="instagram" placeholder="https://instagram.com">
+                                </div>
+                                <div class="form-group">
+                                  <label for="twitter">Twitte</label>
+                                  <input type="text" class="form-control"   name="twitter" id="twitter" placeholder="https://twitter.com">
+                                </div>
+                                <div class="form-group">
+                                  <label for="linkedin">LinkedIn</label>
+                                  <input type="text" class="form-control"   name="linkedin" id="linkedin" placeholder="https://linkedin.com">
+                                </div>
+                              </div>
+                           <div>
+                              <button type="submit" id="submit" class="btn btn-primary">Save</button>
+                          </div>
+                      </form>
+                    </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+<script type="text/javascript">
+  
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          function na(){
+            $('#logoPreview').attr("src", e.target.result)
+            $('#imgPreviewBox').show(300);
+          }
+          na();
+        }
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+      }
+    }
+    $("#img").change(function() {
+    readURL(this);
+    });
+
+</script>
+
+
+<script>
+  var projects = []
+
+  function isValidURL(url) {
+    return /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/.test(url); 
+  }
+
+  $('.addProject').click(()=> {
+
+  if($('.projectpreview .row').children().length < 6 ){
+
+
+
+if( isValidURL($('#projecturl').val())){
+
+  if(projects.indexOf($('#projecturl').val()) == -1){
+
+    $('.projectpreview .row').append(`<div class="col-2 p-2 mx-1"><img src="https://api.site-shot.com/?url=${$('#projecturl').val()}&amp;userkey=IAAIEYKBJANTHZ6IA2EGC7G5XJ" class="img-fluid"></div>`)
+
+      projects.push($('#projecturl').val());
+      $('#projecturl').val('')
+      toastr["success"]("Please wait , image is being added");
+  }else{
+    $('#projecturl').val('')
+    toastr["warning"]('project already listed, try with a different url');
+  }
+
+}else{
+    toastr["error"]("Please insert a valid url");
+}
+
+      
+
+
+
+  }else{
+   toastr["error"]("Can't add more than 6 projects");
+  }
+
+  })
+</script>
+
+
+
+
+
+
+
+<script> 
+$('.newIntern #form').submit((e)=>{
+  e.preventDefault();
+  var formData = new FormData(document.getElementById('form'));
+  formData.append('projects' ,projects)
+  $.ajax({
+    type : 'POST',
+    url: '/interns/new',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(res) {
+      if(res.status){
+       Swal.fire(
+          'Success',
+          'Benefit Added',
+          'success'
+        ).then(()=> {
+          window.location.href = "/interns"
+        })
+      }
+    },
+    error : function(err){
+      Swal.fire(
+          'Error',
+          'Something went wrong',
+          'error'
+        )
+    }
+  })
+})
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include("../../partials/admin-footer") -%>

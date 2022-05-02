@@ -123,7 +123,6 @@
         var reader = new FileReader();
         reader.onload = function(e) {
           function na(){
-            let im = document.createElement("logoPreview");
             $('#imgPreview').attr("src", e.target.result)
             $('#imgPreviewBox').show(300);
           }
@@ -172,6 +171,13 @@
             $('.serviceForm').hide(300);
         })
         }
+      },
+      error : function(err){
+        Swal.fire(
+            'Error',
+            'Something went wrong',
+            'error'
+          )
       }
     })
   })
@@ -199,7 +205,7 @@ if(service.show_content_first){
 }else{
   $('#serviceform #show_content_first').attr('checked',false)
 }
-      // service.show_content_first ?    :  $('#serviceform #show_content_first').attr('checked',false);
+      
       $(window).scrollTop(0);
 
 
@@ -219,7 +225,7 @@ if(service.show_content_first){
 
   formData.append("oldData",JSON.stringify(service) );
 
-// handle service item edit
+
 $.ajax({
   type: 'PUT',
   url : '/services/service',
@@ -244,13 +250,17 @@ console.log($('#serviceform #show_content_first'))
         })
         .then(() =>{
             updateService(btn,res.service)
-            // console.log(res)
+            
         })
     }
   },
-  error : function(err) {
-    console.log(err);
-  }
+  error : function(err){
+      Swal.fire(
+          'Error',
+          'Something went wrong',
+          'error'
+        )
+    }
 })
 
   })
@@ -310,6 +320,13 @@ Swal.fire({
         })
           
           }
+        },
+        error : function(err){
+          Swal.fire(
+              'Error',
+              'Something went wrong',
+              'error'
+            )
         }
       })
 

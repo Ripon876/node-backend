@@ -365,7 +365,7 @@ var internseed = {
 		instagram : "https://instagram.com",
 		linkedIn : "",
   },
-  img: "http://localhost:3000/img/intern.png",
+  img: "http://localhost:5000/uploads/interns/intern.png",
 	projects : [
   {
   	title :  "A2 Series",
@@ -380,10 +380,10 @@ var internseed = {
 
 // Interns.collection.drop();
 
-//  Interns.create(internseed,(err,ddfds) => {
-//     if(err) console.log(err);
-//     console.log(ddfds);
-//  });
+ // Interns.create(internseed,(err,ddfds) => {
+ //    if(err) console.log(err);
+ //    console.log(ddfds);
+ // });
 
 
 // Interns.find({},(err,dt) => { console.log(dt)})
@@ -395,11 +395,6 @@ var internseed = {
 
 
 
-
-
-
-
-console.log("called")
 
 
 

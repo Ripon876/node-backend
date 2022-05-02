@@ -133,7 +133,6 @@ function readURL(input) {
   var reader = new FileReader();
   reader.onload = function(e) {
     function na(){
-      let im = document.createElement("logoPreview");
       $('#logoPreview').attr("src", e.target.result)
       $('#imgPreviewBox').show(300);
     }
@@ -149,7 +148,6 @@ function readURL2(input) {
   var reader = new FileReader();
   reader.onload = function(e) {
     function na(){
-      let im = document.createElement("logoPreview");
       $('#imgPreview').attr("src", e.target.result)
       $('#imgPreviewBox').show(300);
     }
@@ -205,6 +203,13 @@ readURL2(this);
             $('.aboutHeadings').hide(300);
         })
         }
+      },
+      error : function(err){
+        Swal.fire(
+            'Error',
+            'Something went wrong',
+            'error'
+          )
       }
     })
   })
@@ -250,7 +255,6 @@ var btn;
 
   formData.append("oldData",JSON.stringify(benefit) );
 
-// handle service item edit
 $.ajax({
   type: 'PUT',
   url : '/about/benefits',
@@ -276,9 +280,13 @@ $.ajax({
         })
     }
   },
-  error : function(err) {
-    console.log(err);
-  }
+  error : function(err){
+      Swal.fire(
+          'Error',
+          'Something went wrong',
+          'error'
+        )
+    }
 })
 
   })
@@ -334,6 +342,13 @@ Swal.fire({
         })
           
           }
+        },
+        error : function(err){
+          Swal.fire(
+              'Error',
+              'Something went wrong',
+              'error'
+            )
         }
       })
 

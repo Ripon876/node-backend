@@ -64,8 +64,8 @@
     if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function(e) {
+
     function na(){
-    let im = document.createElement("logoPreview");
     $('#logoPreview').attr("src", e.target.result)
     $('#imgPreviewBox').show(300);
     }
@@ -82,7 +82,6 @@
       $('#formID').css('pointer-events','all');
       $('#editForm').attr('disabled', true);
       toastr["success"]("Now you can edit the form");
-      // this.css('pointer-events','none')
 
     })
 </script>
@@ -118,9 +117,13 @@ success: function(response) {
  }
 
 },
-error : function(err) {
-console.log(err)
-}
+error : function(err){
+      Swal.fire(
+          'Error',
+          'Something went wrong',
+          'error'
+        )
+    }
 });
 })
 </script>
