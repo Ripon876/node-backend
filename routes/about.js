@@ -154,7 +154,6 @@ router.put("/about/benefits",middlewares.isLoggedIn,async (req,res)=> {
 				     var benefitIndex = about.benefits.findIndex(o => o.title === JSON.parse(oldData).title && o.img === JSON.parse(oldData).img);
 					 
 					   about.benefits[benefitIndex] = newData;
-					   console.log(about.benefits[benefitIndex])
 					   about.save((err,service)=> {
 					   		if(err) res.status(501).json({err: "something went wrong"});
 						      	res.status(200).json({status :  true,benefit : about.benefits[benefitIndex]});

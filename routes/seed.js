@@ -271,40 +271,19 @@ var servicesseed = {
 
 
 var weofferseed = {
-	title :  'What We Offer',
-	short_description :  'Pellentesque in ipsum id orci porta dapibus. Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus.',
-	offers : [
-	{
-	img :  'http://localhost:3000/img/programmer.svg',
-	title :  'Qualified Engineers',
-	description : 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta.Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque'
-	},
-	{
-	img :  'http://localhost:3000/img/d-team.svg',
-	title :  'Dedicated Team',
-	description : 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta.Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque'
-	},
-	{
-	img :  'http://localhost:3000/img/team-collaboration.svg',
-	title :  'Collaborative Process',
-	description : 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta.Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque'
-	},
-	{
-	img :  'http://localhost:3000/img/supervision.svg',
-	title :  'Continuous Supervision',
-	description : 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta.Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque'
-	}
-	]
+	title :  '',
+	short_description :  '',
+	offers : []
 }
 
 
 
 // WeOffer.collection.drop();
 
-//  WeOffer.create(weofferseed,(err,ddfds) => {
-//     if(err) console.log(err);
-//     console.log(ddfds);
-//  });
+ // WeOffer.create(weofferseed,(err,ddfds) => {
+ //    if(err) console.log(err);
+ //    console.log(ddfds);
+ // });
 
 
 // WeOffer.find({},(err,dt) => { console.log(dt)})

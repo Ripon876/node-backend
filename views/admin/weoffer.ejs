@@ -1,0 +1,397 @@
+<%- include("../../partials/admin-header") -%>
+<%- include("../../partials/admin-nav") -%>
+
+
+        <div class="content-wrapper p-5">
+         
+          <div class="row">
+            <div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                <div class="align-items-baseline d-flex justify-content-between">
+                        <p class="card-title">We Offer</p>
+                        <div>
+                          <button  id="editForm" class="btn btn-primary">Edit</button>
+                          <a href="/offers/new"  class="btn btn-primary">Add New</a>               
+                        </div>
+
+                  </div>
+
+                <div class="offerHeadings py-5">
+                      <form id="form" method="post" enctype="multipart/form-data">
+                             <div class="form-group">
+                                  <label for="title">Title</label>
+                                  <input type="text" class="form-control" value="<%= offers.title %>" name="title"  id="title" placeholder="title">
+                              </div>
+                              <div class="form-group">
+                                  <label for="description">Description</label>
+                                  <textarea class="form-control border"    name="short_description" id="short_description" rows="3" placeholder="description" maxlength="125"><%= offers.short_description %></textarea>
+                              </div>
+                           <div>
+                              <button type="submit" id="submit" class="btn btn-primary">Save</button>
+                          </div>
+                      </form>
+                    </div>
+
+
+
+
+<div id="newofferform"  class="py-5">
+  
+    <form id="newbenefiteditform"  method="post" enctype="multipart/form-data">
+        <div class="form-group">
+              <label for="title">Title</label>
+                <input type="text" class="form-control"  name="title"  id="title" placeholder="title">
+              </div>
+              <div class="d-flex form-group row">
+                <div class="col-lg-4 col-md-4">
+                  <label for="img">Image</label>
+                  <input type="file"   style="border: none !important;" class="form-control" name="img" id="benefitimg">
+                </div>
+                <div id="imgPreviewBox" class="col col-lg-8 text-center" style="height: 500px;width: auto;margin: auto;overflow: scroll;position: relative;">
+                  <img src=''   id="imgPreview"   class="img-fluid"style="left: 50%;transform: translate(-50%, 0);position: absolute;">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control border"   name="description" id="description" rows="3" placeholder="description" maxlength="125"></textarea>
+              </div>
+        <div>
+            <button type="submit" id="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+               <div class="table-responsive">
+                              <table id="recent-purchases-listing" class="table">
+                                <thead>
+                                  <tr>
+                                      <th>Image</th>
+                                      <th>Title</th>
+                                      <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+
+
+                    <% if(offers){ %>
+                        <% offers.offers.forEach((offer)=> {  %>
+                          <tr>
+                              <td><img src="<%= offer.img %>" alt=""></td>
+                              <td><h4><%= offer.title %></h4></td> 
+                              <td class="text-center">
+                                <input type="text" value="<%= JSON.stringify(offer) %>" class="d-none">
+                                <button class="btn btn-primary px-3 py-2 editOffer">Edit</button>
+                                <button class="btn btn-danger px-3 py-2 deleteOffer">Delete</button>
+                              </td>
+                          </tr>   
+                       <%  }) %>
+                    <% } %> 
+
+                         
+                      </tbody>
+                    </table>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+<script type="text/javascript">
+
+
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    function na(){
+      $('#logoPreview').attr("src", e.target.result)
+      $('#imgPreviewBox').show(300);
+    }
+    na();
+  }
+  reader.readAsDataURL(input.files[0]); // convert to base64 string
+  }
+}
+
+function readURL2(input) {
+
+  if (input.files && input.files[0]) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    function na(){
+      $('#imgPreview').attr("src", e.target.result)
+      $('#imgPreviewBox').show(300);
+    }
+    na();
+  }
+  reader.readAsDataURL(input.files[0]); // convert to base64 string
+  }
+}
+
+$("#img").change(function() {
+readURL(this);
+});
+
+$("#benefitimg").change(function() {
+readURL2(this);
+});
+
+</script>
+
+<script>
+  $('.offerHeadings').hide();
+  $('#newofferform').hide();
+
+
+
+  $('#editForm').click(()=> {
+      $("#editForm").attr('disabled' ,true)
+     $('.offerHeadings').show(300);
+  })
+
+
+
+
+
+ $('.offerHeadings #form').submit((e)=>{
+    e.preventDefault();
+    var formdata = new FormData(document.getElementById('form'));
+    $.ajax({
+      type: 'PUT',
+      url: '/offers',
+      data: formdata,
+      processData : false,
+      contentType: false,
+      success: function(res) {
+        if(res.status){
+               Swal.fire(
+          'Success',
+          'Info updated',
+          'success'
+        ).then(()=> {
+            $('#editForm').attr('disabled', false);
+           
+            $('.offerHeadings').hide(300);
+        })
+        }
+      },
+      error : function(err){
+        Swal.fire(
+            'Error',
+            'Something went wrong',
+            'error'
+          )
+      }
+    })
+  })
+
+
+</script>
+
+
+
+
+
+
+
+
+<script>
+  
+
+var benefit;
+var btn;
+
+  $(".editOffer").on('click',(e) => {
+      btn = e;
+      benefit =  JSON.parse(e.target.previousElementSibling.value);
+      $('#newofferform').show(300);
+      $('#newofferform #title').val(benefit.title);
+      $('#newofferform #imgPreview').attr('src',benefit.img);
+      $('#newofferform #description').val(benefit.description);
+
+      $(window).scrollTop(0);
+
+  })
+
+ 
+</script>
+
+
+<script>
+   $('#newofferform form').submit((e)=> {
+    e.preventDefault();
+  
+  var formData = new FormData(document.getElementById('newbenefiteditform'))
+
+
+  formData.append("oldData",JSON.stringify(benefit) );
+
+$.ajax({
+  type: 'PUT',
+  url : '/offers/offer',
+  data : formData,
+  processData: false,
+  contentType: false,
+  success : function(res) {
+    if(res.status){
+ 
+       Swal.fire(
+          'Success',
+          'Offer updated',
+          'success'
+        ).then(()=> {
+          $('#newofferform').hide(300);
+          $('#newofferform #title').val('');
+          $('#newofferform #imgPreview').attr('src','');
+          $('#newofferform #description').val('');
+          
+        })
+        .then(() =>{
+            updateService(btn,res.benefit)
+        })
+    }
+  },
+  error : function(err){
+      Swal.fire(
+          'Error',
+          'Something went wrong',
+          'error'
+        )
+    }
+})
+
+  })
+</script>
+
+
+
+<script>
+  function updateService(e,benefit) {
+
+    e.target.previousElementSibling.value = JSON.stringify(benefit);
+    var title = e.target.parentElement.previousElementSibling.children[0];
+    var img = e.target.parentElement.previousElementSibling.previousElementSibling.children[0];
+  
+    img.src = benefit.img;
+    title.textContent = benefit.title;
+
+  }
+</script>
+
+
+<script>
+ 
+  $('.deleteOffer').click((e)=> {
+   var benefit =JSON.parse(e.target.previousElementSibling.previousElementSibling.value);
+
+
+Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result)=> {
+   if(result.isConfirmed){
+
+      $.ajax({
+        type: 'DELETE',
+        url : '/about/benefits',
+        data : benefit,
+        success :  function(res){
+          if(res.status){
+             Swal.fire(
+          'Success',
+           res.msg,
+          'success'
+        ).then(()=> {
+
+            e.target.parentElement.parentElement.remove();
+
+        })
+          
+          }
+        },
+        error : function(err){
+          Swal.fire(
+              'Error',
+              'Something went wrong',
+              'error'
+            )
+        }
+      })
+
+   }
+})
+
+
+
+  })
+</script>
+
+<script>
+ 
+  $('.deleteOffer').click((e)=> {
+   var offer =JSON.parse(e.target.previousElementSibling.previousElementSibling.value);
+
+
+Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result)=> {
+   if(result.isConfirmed){
+
+      $.ajax({
+        type: 'DELETE',
+        url : '/offers/offer',
+        data : offer,
+        success :  function(res){
+          if(res.status){
+             Swal.fire(
+          'Success',
+           res.msg,
+          'success'
+        ).then(()=> {
+
+            e.target.parentElement.parentElement.remove();
+
+        })
+          
+          }
+        },
+        error : function(err){
+          Swal.fire(
+              'Error',
+              'Something went wrong',
+              'error'
+            )
+        }
+      })
+
+   }
+})
+
+
+
+  })
+</script>
+
+<%- include("../../partials/admin-footer") -%>

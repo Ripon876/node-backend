@@ -4,11 +4,6 @@ var bodyParser = require("body-parser");
 var passport = require("passport");
 var mongoose = require("mongoose");
 var User = require("./models/user");
-// var Exam = require("./models/exam");
-// var Exam = require("./models/exam");
-// var Answer = require("./models/answer");
-// var Notice = require("./models/notice");
-
 var middlewares = require("./middlewares/middleware");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
@@ -44,6 +39,7 @@ var services  = require("./routes/services");
 var career  = require("./routes/career");
 var interns  = require("./routes/interns");
 var clients  = require("./routes/clients");
+var weoffer  = require("./routes/weoffer");
 
 var mongoDbStr;
 
@@ -108,6 +104,7 @@ app.use(services);
 app.use(career);
 app.use(interns);
 app.use(clients);
+app.use(weoffer);
 
 
 app.get('/',(req,res) => {
@@ -118,32 +115,9 @@ app.get('/admin',middlewares.isLoggedIn,(req,res) => {
 	res.render("admin/admin-das" , {title :  "MD Ripon islam"})
 })
 
-/*app.get('/login',(req,res) => {
-	res.render("login" , {title :  "MD Ripon islam"})
-})
-*/
-
-
-
-app.get('/ripon',(req,res)=> {
-  
-})
-
-
-
-
-
-
-
-
-
 
 
 app.listen(port, () => {
 	console.log("server started ar port 5000")
 } )
-
-
-
-
 
