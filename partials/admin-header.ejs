@@ -65,7 +65,7 @@
       <nav class="navbar col-lg-12 col-12 p-0 d-flex flex-row">
         <div class="navbar-brand-wrapper d-flex justify-content-center">
           <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-            <a class="navbar-brand brand-logo" href="/"><i class="fa fa-graduation-cap"></i> DASH</a>
+            <a class="navbar-brand brand-logo" href="/"><i class="fa fa-code-fork"></i> A2series   </a>
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-sort-variant"></span>
             </button>
@@ -82,9 +82,24 @@
                 <p class="mb-0 font-weight-normal float-left dropdown-header text-white-50">Messages</p>
 
 <div class="messages">
-  
 
-  <a class="dropdown-item" href="/user/messages/dfgfd">
+      <% if( messages ){ %>
+
+        <% messages.forEach((msg)=> { %>
+        <a class="dropdown-item" href="/messages/<%= msg._id  %>">
+
+            <div class="item-content flex-grow">
+              <h6 class="ellipsis font-weight-normal"  style="color : <%= msg.read ? '' : '#d8d8d8 !important' %>" ><%= msg.first_name + " " + msg.last_name %></h6>
+              <p class="font-weight-light small-text text-muted mb-0" style="color : <%= msg.read ? '' : '#d8d8d8 !important' %>"  >
+               <%= msg.message.substring(0,100) %>
+              </p>
+            </div>
+        </a>
+  
+        <% }) %>
+
+      <% } %>
+<!--   <a class="dropdown-item" href="/user/messages/dfgfd">
     <div class="item-thumbnail">
      <i class="mdi mdi-account-box" style="font-size: 30px;"></i>
     </div>
@@ -95,7 +110,7 @@
       </p>
     </div>
   </a>
-  
+   -->
 </div>
 
 

@@ -213,7 +213,7 @@ router.post('/contact',(req,res) => {
     if(err){
       res.status(400).json({err: "something went wrong"});
     }else{
-      console.log(newMsg);
+     
       res.status(200).json({success : true,msg : 'Message sucessfully sent'})
     }
 

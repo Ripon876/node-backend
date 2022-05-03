@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var passport = require("passport");
 var mongoose = require("mongoose");
 var User = require("./models/user");
+var Messages = require("./models/messages");
 var middlewares = require("./middlewares/middleware");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
@@ -40,6 +41,7 @@ var career  = require("./routes/career");
 var interns  = require("./routes/interns");
 var clients  = require("./routes/clients");
 var weoffer  = require("./routes/weoffer");
+var messages  = require("./routes/messages");
 
 var mongoDbStr;
 
@@ -91,20 +93,34 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
+app.use((req,res,next)=> {
+
+  
+  if(req.isAuthenticated){
+
+    Messages.find({}, function(err,messages) {
+        if (err) console.log(err);
+        res.locals.messages = messages;
+        next();
+      }); 
+        
+  }
+
+})
 
 
 
-
-app.use(login);
-app.use("/api", apis);
-app.use(slider);
-app.use(about);
-app.use(settings);
-app.use(services);
-app.use(career);
-app.use(interns);
-app.use(clients);
-app.use(weoffer);
+app.use(login); // login route
+app.use("/api", apis); // api routes
+app.use(slider); // slider route
+app.use(about); // about route
+app.use(settings); // settings route
+app.use(services); // services route
+app.use(career); // career route
+app.use(interns); // interns route
+app.use(clients); // clients route
+app.use(weoffer); // what we offer route
+app.use(messages); // messages ( message from contact form) route
 
 
 app.get('/',(req,res) => {

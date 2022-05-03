@@ -1,0 +1,82 @@
+<%- include("../../partials/admin-header",{updatedMsg : msg}) -%>
+<%- include("../../partials/admin-nav") -%>
+
+
+        <div class="content-wrapper p-5">
+         
+          <div class="row">
+            <div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="">Message from : <strong><%= msg.first_name + " " + msg.last_name %></strong> </h4>
+                  <div>
+                    <p style="font-size: 16px;">Message : </p>
+                    <p style="font-size: 16px;">
+                      <%= msg.message %>    
+                    </p>
+                    <p class="pt-3">Email : <%= msg.email %></p>
+                  </div>
+                  <div class="pt-5">
+                    <h4>Send a reply</h4>
+                    <form id="sendReply">
+                    <div class="form-group">
+                      <label for="Email">Email</label>
+                      <input type="email" value="<%= msg.email %>" class="form-control" id="Email" name="email" placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                      <label for="msg">Message</label>
+                      <textarea class="form-control border" rows='10' name="msg" id="msg" ></textarea>
+                    </div>
+                    <div class="justify-content-between row">
+                      <button type="submit" class="btn btn-primary">Send</button> 
+                      <a href="/admin" class="btn btn-primary">Back to dashboard</a>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+<script type="text/javascript">
+
+$('#sendReply').submit((e)=>{
+  e.preventDefault();
+  var formData = new FormData(document.getElementById('sendReply'));
+
+  $.ajax({
+    type : 'POST',
+    url : '/messages/send',
+    data : formData,
+    processData : false,
+    contentType : false,
+    success : function(res){
+      if(res.status){
+         Swal.fire(
+          'Success',
+          res.msg,
+          'success'
+        ).then(()=> {
+          window.location.href = '/admin';
+        })
+      }
+    },
+    error : function(err){
+      Swal.fire(
+        'Error',
+        'Something went wrong',
+        'error'
+      )
+    }
+  })
+})
+
+</script>
+
+
+
+<%- include("../../partials/admin-footer") -%>
