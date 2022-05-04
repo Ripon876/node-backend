@@ -10,6 +10,10 @@ var WeOffer = require("../models/weOffer");
 var Messages = require("../models/messages");
 var Careers = require("../models/careers");
 var Interns = require("../models/interns");
+var Applications = require("../models/application");
+var UploadFile = require("../helpers/fileUpload");
+
+
 
 // site settings api
 router.get("/site_settings",(req,res) => {
@@ -149,10 +153,50 @@ router.get('/careers/:link',(req,res) => {
     })
    } 
 
-
-
-
 })
+
+
+
+router.post('/career/apply',async (req,res)=> {
+  if(req.body){
+  
+
+      var  fullname = req.body.firstName + " " + req.body.lastName;
+      var serverURl = `${req.protocol}://${req.get('host')}`;
+      var fileName =  fullname.replace(/ /g,'_') + "_" + Math.floor(Math.random() * 10000);
+      var link = serverURl;
+
+      if (req.files) {
+        var  filepath = await UploadFile(req.files.cv,fileName,'resume');
+        link += filepath;
+      }
+
+      var application = {
+          aplicant : {
+          name : fullname,
+          email : req.body.email,
+          github_link : req.body.github,
+          portfolio_link : req.body.portfolio,
+          cv : link,
+        },
+        applied_for : req.body.opening
+      }
+
+
+  Applications.create(application,(err,data)=> {
+      if(err) res.status(501).json({err: "something went wrong"});
+      
+      res.status(200).json({status :  true})
+
+  })
+
+  }else{
+    res.status(405).json({err: "Method Not Allowed"});
+  }
+})
+
+
+
 
 // interns api
 router.get("/interns",(req,res) => {
@@ -164,9 +208,6 @@ router.get("/interns",(req,res) => {
       res.status(400).json({err: "something went wrong"});
       console.log(err)
     }else{
-     // var dataWithOutId =   data[0].toObject();
-     // delete dataWithOutId._id;
-     // delete dataWithOutId.__v;
      res.status(200).json(data);      
     }
 
@@ -175,7 +216,6 @@ router.get("/interns",(req,res) => {
 
 
 router.get("/interns/:id",(req,res) => {
-
    if(req.params.id){
       Interns.findById(req.params.id,(err,data) => {
         if(data === []){
@@ -185,9 +225,6 @@ router.get("/interns/:id",(req,res) => {
           res.status(400).json({err: "something went wrong"});
           console.log(err)
         }else{
-         // var dataWithOutId =   data[0].toObject();
-         // delete dataWithOutId._id;
-         // delete dataWithOutId.__v;
          res.status(200).json(data);      
         }
 
@@ -200,14 +237,16 @@ router.get("/interns/:id",(req,res) => {
 
 
 router.post('/contact',(req,res) => {
+
+  if(req.body){
+
   var msg = {
     first_name  : req.body.firstName,
     last_name  : req.body.lastName,
     email : req.body.email,
     message : req.body.msg,
   }
-  if(req.body){
-
+  
    Messages.create(msg,(err,newMsg) => {
     
     if(err){
@@ -220,10 +259,14 @@ router.post('/contact',(req,res) => {
    })
 
 
+  }else{
+    res.status(405).json({err: "Method Not Allowed"});
   }
 })
 
-
+/*Applications.find({},(err,data)=> {
+  console.log(data)
+})*/
 
 
 
