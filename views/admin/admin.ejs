@@ -1,12 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-</head>
-<body>
-	<h1>this is the admin dashboard</h1>
-	<h1><%= title %></h1>
-</body>
-</html>
+<%- include("../../partials/admin-header") -%>
+<%- include("../../partials/admin-nav") -%>
+
+
+        <div class="content-wrapper p-5">
+         
+          <div class="row">
+            <div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Dashboard</p>
+                      
+                <h3>Welcome to <strong> <%= data.settings.logo %></strong></h3>
+	            <h4 class=" pt-4"><%= data.settings.logo %> currenlty have</h4>
+                 <div class="justify-content-center row">
+                 	<div class="col-lg-3 col-md-3 col-sm-10 py-2">
+                 		<div class="card">
+                 			<div class="card-body text-center" style="color: #4a4a4a;">
+                 				<h1 class="card-title" style="font-size: 65px;"><i class="mdi  mdi-google-photos"></i></h1>
+                 				<p style="font-size: 17px;">
+                 				<span style="font-size: 35px;font-weight: bold;">
+                 					<%= data.data[0][1] %>
+                 			</span> Slides</p>
+                 			</div>
+                 		</div>
+                 	</div>
+                 	<div class="col-lg-3 col-md-3 col-sm-10 py-2">
+                 		<div class="card">
+                 			<div class="card-body text-center" style="color: #4a4a4a;">
+                 				<h1 class="card-title" style="font-size: 65px;"><i class="mdi   mdi-format-line-style"></i></h1>
+                 				<p style="font-size: 17px;">
+                 					<span style="font-size: 35px;font-weight: bold;">
+                 					<%= data.data[1][1] %>
+                 					</span> Services</p>
+                 			</div>
+                 		</div>
+                 	</div>
+                 	<div class="col-lg-3 col-md-3 col-sm-10 py-2">
+                 		<div class="card">
+                 			<div class="card-body text-center" style="color: #4a4a4a;">
+                 				<h1 class="card-title" style="font-size: 65px;"><i class="mdi  mdi-clipboard-account-outline"></i></h1>
+                 				<p style="font-size: 17px;">
+                 					<span style="font-size: 35px;font-weight: bold;">
+										<%= data.data[2][1] %>
+                 				     </span> Openings</p>
+                 			</div>
+                 		</div>
+                 	</div>
+                 	<div class="col-lg-3 col-md-3 col-sm-10 py-2">
+                 		<div class="card">
+                 			<div class="card-body text-center" style="color: #4a4a4a;">
+                 				<h1 class="card-title" style="font-size: 65px;"><i class="mdi mdi-account-switch"></i></h1>
+                 				<p style="font-size: 17px;">
+                 					<span style="font-size: 35px;font-weight: bold;">
+										<%= data.data[3][1] %>
+                 				     </span> Interns</p>
+                 			</div>
+                 		</div>
+                 	</div>
+                 </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+<script type="text/javascript">
+  
+/*Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result)=> {
+  console.log(result)
+})
+
+*/
+
+
+function showToast(){
+   toastr["success"]("ripon", "Ripon");
+   toastr["error"]("ripon", "Ripon");
+   toastr["warning"]("ripon", "Ripon");
+   toastr["info"]("ripon", "Ripon");
+}
+/*
+var data  = <%- JSON.stringify(data.data) %> ;
+// console.log(data)
+   
+   data.forEach((item)=> {
+   	$('.itemRow').append(`<div class="col-lg-3 col-md-3 col-sm-10 py-2">
+                 		<div class="card">
+                 			<div class="card-body text-center" style="color: #4a4a4a;">
+                 				<h1 class="card-title" style="font-size: 65px;"><i class="mdi   mdi-format-line-style"></i></h1>
+                 				<p style="font-size: 17px;"><span style="font-size: 35px;font-weight: bold;">${item[1]}</span>${item[0]}</p>
+                 			</div>
+                 		</div>
+                 	</div>`)
+
+    // console.log(item[0])
+   })
+
+*/
+
+
+</script>
+
+
+
+<%- include("../../partials/admin-footer") -%>

@@ -30,7 +30,8 @@ var port = process.env.PORT || 5000;
 
 
 
-var SEED  = require("./routes/SEED");
+
+var admin  = require("./routes/admin");
 var login  = require("./routes/login");
 var apis  = require("./routes/apis");
 var settings  = require("./routes/settings");
@@ -110,25 +111,22 @@ app.use((req,res,next)=> {
 
 
 
-app.use(login); // login route
+app.use(admin);          // admin route
+app.use(login);         // login route
 app.use("/api", apis); // api routes
-app.use(slider); // slider route
-app.use(about); // about route
-app.use(settings); // settings route
+app.use(slider);      // slider route
+app.use(about);      // about route
+app.use(settings);  // settings route
 app.use(services); // services route
-app.use(career); // career route
-app.use(interns); // interns route
-app.use(clients); // clients route
-app.use(weoffer); // what we offer route
+app.use(career);  // career route
+app.use(interns);     // interns route
+app.use(clients);    // clients route
+app.use(weoffer);   // what we offer route
 app.use(messages); // messages ( message from contact form) route
 
 
 app.get('/',(req,res) => {
 	res.render("index" , {title :  "MD Ripon islam"})
-})
-
-app.get('/admin',middlewares.isLoggedIn,(req,res) => {
-	res.render("admin/admin-das" , {title :  "MD Ripon islam"})
 })
 
 
