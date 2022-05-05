@@ -16,7 +16,7 @@ router.get('/applications',middlewares.isLoggedIn,(req,res)=> {
 
 
 
-router.delete("/applications",(req,res)=> {
+router.delete("/applications",middlewares.isLoggedIn,(req,res)=> {
 	if(req.body){
 		
 
@@ -32,16 +32,10 @@ router.delete("/applications",(req,res)=> {
    })
 
 
-
 	}else{
 		res.status(405).json({err: "Method Not Allowed"});
 	}
 })
-
-
-
-
-
 
 
 

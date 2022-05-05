@@ -1,9 +1,6 @@
 var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
-var fs = require('fs');
-var path = require("path");
-var Filehound = require('filehound');
 var Site_settings = require("../models/settings");
 var Slider = require("../models/slides");
 var About = require("../models/about");
@@ -15,6 +12,7 @@ var Careers = require("../models/careers");
 var Interns = require("../models/interns");
 var Applications = require("../models/application");
 var middlewares = require("../middlewares/middleware");
+var clearFiles = require('../helpers/clearFiles');
 var SEED  = require("./seed");
 
 
@@ -50,7 +48,6 @@ var adminData = {
 
 	]
 }
-
 
 
 	res.render("./admin/admin",{data : adminData})
@@ -95,43 +92,4 @@ module.exports = router;
 
 
 const getName = thePath => thePath.substring(thePath.lastIndexOf('/') + 1)
-
-function clearFiles() {
-
-var folders = []
-Filehound.create()
-  .path(path.join(__dirname, '../public/uploads'))
-  .directory()  
-  .find()
-  .then((directories) => {
-  	directories.forEach((dir)=> {
-
-  	 folders.push(dir.split('\\').reverse()[0])
-  		// console.log(getName(dir))
-  	})
-  })
-  .then(()=> {
-  	folders.forEach((folder)=> {
-
-		var folder = path.join(__dirname, '../public/uploads/' + folder + '/');
-
-		fs.readdir(folder, (err, files) => {
-
-		  if (err) throw err;
-
-		  for (const file of files) {
-
-		      console.log(file + ' : File Deleted Successfully.');
-
-		      fs.unlinkSync(folder+file);
-
-		  }
-		  
-		});
-
-
-  	})
-  })
-
-}
 
