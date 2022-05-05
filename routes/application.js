@@ -14,5 +14,41 @@ router.get('/applications',middlewares.isLoggedIn,(req,res)=> {
 	})
 })
 
+
+
+router.delete("/applications",(req,res)=> {
+	if(req.body){
+		
+
+	
+
+   Applications.findByIdAndDelete(req.body._id,(err,application)=> {
+   	   if(err) res.status(501).json({err: "something went wrong"});
+	   	   if(application && deleteFile(getFileName(req.body.aplicant.cv),'resume')){
+	   	   	    res.status(200).json({status : true})
+	   	   }else{
+	   	     	res.status(501).json({err: "something went wrong"});
+	   	   }
+   })
+
+
+
+	}else{
+		res.status(405).json({err: "Method Not Allowed"});
+	}
+})
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;
 
+
+const getFileName = thePath => thePath.substring(thePath.lastIndexOf('/') + 1)
