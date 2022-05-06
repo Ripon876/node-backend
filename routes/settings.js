@@ -44,12 +44,14 @@ router.post('/settings',middlewares.isLoggedIn,async (req,res) => {
 		var newSettings = {
 			social_links: {}
 		}
-
+  	
+  var serverURl = `${req.protocol}://${req.get('host')}`;
+  var link = serverURl;
 		
 		if (req.files) {
 
 			imgPath = await UploadFile(req.files.img,fileName);
-		 link = imgPath;
+		 link += imgPath;
 		}
 
 
