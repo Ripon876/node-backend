@@ -5,9 +5,9 @@ const path = require("path");
 
 const deleteFile  = (fileName,folderName) => {
 	var errMsg;
-	var filepath = path.join(__dirname, '../public/uploads/', fileName);
+	var filepath = path.join('./public/uploads/', fileName);
 	if(folderName){
-	   	 filepath = path.join(__dirname, '../public/uploads/',folderName, fileName);
+	   	 filepath = path.join('./public/uploads/',folderName, fileName);
 	}
 
 

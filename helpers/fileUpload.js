@@ -7,9 +7,9 @@ const UploadFile  = function(file,name,folderName) {
    var msg;
    var ext = file.name.split(".").reverse()[0];
    var fileName = name + '.' +  ext;
-   var filepath = path.join(__dirname, '../public/uploads/', fileName);
+   var filepath = path.join('./public/uploads/', fileName);
    if(folderName){
-   	 filepath = path.join(__dirname, '../public/uploads/',folderName, fileName);
+   	 filepath = path.join('./public/uploads/',folderName, fileName);
    }
 
 			if (file.size > 1048576) {
