@@ -133,7 +133,8 @@ app.use(applications); // applications route
 
 
 app.get('/',(req,res) => {
-	res.render("index" , {title :  "MD Ripon islam"})
+	// res.render("index" , {title :  "MD Ripon islam"})
+  res.redirect('/login')
 })
 
 
