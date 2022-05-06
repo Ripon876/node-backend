@@ -80,8 +80,8 @@ Interns.collection.drop();
 	await WeOffer.create(SEED.weoffers);
 	await Careers.create(SEED.careers);
 	console.log('initial schema added');
-})();*/
-
+})();
+*/
 
 
 

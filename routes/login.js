@@ -15,9 +15,13 @@ var middlewares    = require("../middlewares/middleware");
  // 	  	console.log(err)
  	  	
  // 	  }else{
- // 	  	// console.log("user created",user)
+ // 	  	console.log("user created",user)
  // 	  }
  // })
+
+router.get("admin",)
+
+
 
 
 

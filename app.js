@@ -3,8 +3,6 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var passport = require("passport");
 var mongoose = require("mongoose");
-var User = require("./models/user");
-var Messages = require("./models/messages");
 var middlewares = require("./middlewares/middleware");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
@@ -25,12 +23,39 @@ var {
   Server
 } = require("socket.io");
 var io = new Server(server);
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 3000;
+var ip = require('ip');
+
+
+console.log(ip.address())
 
 
 
 
+var mongoDbStr;
+if (port === 5000) {
+  mongoDbStr = "mongodb://localhost:27017/node-backend";
+  console.log(mongoDbStr)
+} else {
+  mongoDbStr = process.env.MONGODB_URI;
+}
 
+mongoose.connect(mongoDbStr, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true
+}); 
+
+app.use(cors())
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+app.use(fileUpload());
+
+var User = require("./models/user");
+var Messages = require("./models/messages");
 var admin  = require("./routes/admin");
 var login  = require("./routes/login");
 var apis  = require("./routes/apis");
@@ -45,34 +70,14 @@ var weoffer  = require("./routes/weoffer");
 var messages  = require("./routes/messages");
 var applications  = require("./routes/application");
 
-var mongoDbStr;
 
-app.use(cors())
-app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json());
-app.use(fileUpload());
 
-/*
-if (port === 3000) {
-  mongoDbStr = "mongodb://localhost:27017/node-backend";
-  console.log(mongoDbStr)
-} else {
-  mongoDbStr = process.env.MONGODB_CON_STR;
-}
-*/
-mongoose.connect('mongodb://localhost:27017/node-backend', {
-  useUnifiedTopology: true,
-  useNewUrlParser: true
-});
+                
 // mongoose.set('useFindAndModify', false);
 
 
 
-
+// mongodb+srv://ripon876:Ripon876@a2series.oa8j7.mongodb.net/bangedb?retryWrites=true&w=majority
 
 
   // ======================
