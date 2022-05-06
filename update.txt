@@ -1,0 +1,7 @@
+about -info
+    > description => short & long
+    > increase des length of long des
+    > new benefit title 
+
+
+
