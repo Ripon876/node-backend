@@ -244,7 +244,7 @@ var btn;
 
   formData.append("oldData",JSON.stringify(slideData) );
 
-
+  toastr["success"]("Please wait, your request is being processing");
 $.ajax({
   type: 'PUT',
   url : '/slider',
@@ -322,6 +322,8 @@ Swal.fire({
 }).then((result)=> {
    if(result.isConfirmed){
 
+  toastr["success"]("Please wait, your request is being processing");
+  
       $.ajax({
         type: 'DELETE',
         url : '/slider',

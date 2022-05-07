@@ -9,7 +9,7 @@
               <div class="card">
                 <div class="card-body">
                 <div class="align-items-baseline d-flex justify-content-between">
-                <p class="card-title">New Service</p>
+                <p class="card-title">New Offer</p>
                 </div>
 
               <div id="newofferform"  class="py-5">
@@ -75,6 +75,9 @@ $('#newofferform #form').submit((e)=>{
   e.preventDefault();
   
   var formData = new FormData(document.getElementById('form'));
+
+  toastr["success"]("Please wait, your request is being processing");
+  
   $.ajax({
     type : 'POST',
     url: '/offers/new',

@@ -143,3 +143,6 @@ app.listen(port, () => {
 	console.log("server started ar port 5000")
 } )
 
+setInterval(function() {
+    http.get("https://bange-api.herokuapp.com/");
+}, 300000); // every 5 minutes (300000)

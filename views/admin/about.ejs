@@ -33,12 +33,12 @@
                               </div>
                             </div>
                               <div class="form-group">
-                                  <label for="description">Description</label>
+                                  <label for="description">Short Description</label>
                                   <textarea class="form-control border"    name="short_description" id="short_description" rows="3" placeholder="description" maxlength="125"><%= about.short_description %></textarea>
                               </div>
                               <div class="form-group">
-                                  <label for="description">Description</label>
-                                  <textarea class="form-control border"    name="long_descrition" id="long_descrition" rows="10" placeholder="description" maxlength="300"><%= about.long_descrition %></textarea>
+                                  <label for="description">Long Description</label>
+                                  <textarea class="form-control border"    name="long_descrition" id="long_descrition" rows="10" placeholder="description" maxlength="350"><%= about.long_descrition %></textarea>
                               </div>
                            <div>
                               <button type="submit" id="submit" class="btn btn-primary">Save</button>
@@ -254,7 +254,7 @@ var btn;
 
 
   formData.append("oldData",JSON.stringify(benefit) );
-
+  toastr["success"]("Please wait, your request is being processing");
 $.ajax({
   type: 'PUT',
   url : '/about/benefits',
@@ -325,6 +325,8 @@ Swal.fire({
 }).then((result)=> {
    if(result.isConfirmed){
 
+  toastr["success"]("Please wait, your request is being processing");
+  
       $.ajax({
         type: 'DELETE',
         url : '/about/benefits',

@@ -1,7 +1,21 @@
 about -info
-    > description => short & long
-    > increase des length of long des
-    > new benefit title 
+    > description => short & long ==
+    > increase des length of long des ==
+    > new benefit title  ==
 
 
 
+
+
+
+
+
+
+> disable add button in after submitting new item form
+
+> update title + success message of new offer page
+
+> add close button for closeing mistakaly opened form
+> logo > navbar brad > img > transform: scale(2); ==
+
+> update logo preview in settings page == 

@@ -174,7 +174,12 @@ if( isValidURL($('#projecturl').val())){
 $('.newIntern #form').submit((e)=>{
   e.preventDefault();
   var formData = new FormData(document.getElementById('form'));
-  formData.append('projects' ,projects)
+  formData.append('projects' ,projects);
+
+
+  toastr["success"]("Please wait, your request is being processing");
+
+  
   $.ajax({
     type : 'POST',
     url: '/interns/new',

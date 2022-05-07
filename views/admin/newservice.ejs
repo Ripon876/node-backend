@@ -85,6 +85,9 @@
 $('#serviceform #form').submit((e)=>{
   e.preventDefault();
   var formData = new FormData(document.getElementById('form'));
+
+  toastr["success"]("Please wait, your request is being processing");
+  
   $.ajax({
     type : 'POST',
     url: '/services',

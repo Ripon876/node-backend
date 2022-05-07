@@ -169,7 +169,7 @@ Swal.fire({
   confirmButtonText: 'Yes, delete it!'
 }).then((result)=> {
    if(result.isConfirmed){
-
+  toastr["success"]("Please wait, your request is being processing");
       $.ajax({
         type: 'DELETE',
         url : '/career/openings',

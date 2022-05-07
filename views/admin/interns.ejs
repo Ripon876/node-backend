@@ -37,7 +37,7 @@
                               <td><h4><%= intern.position %></h4></td> 
                               <td class="text-center">
                                 <input type="text" value="<%= JSON.stringify(intern) %>" class="d-none">
-                                <button class="btn btn-danger px-3 py-2 deleteBenefit">Delete</button>
+                                <button class="btn btn-danger px-3 py-2 deleteIntern">Delete</button>
                               </td>
                           </tr>   
                        <%  }) %>
@@ -86,7 +86,7 @@ readURL(this);
 
 <script>
  
-  $('.deleteBenefit').click((e)=> {
+  $('.deleteIntern').click((e)=> {
    var intern =JSON.parse(e.target.previousElementSibling.value);
 
 
@@ -100,7 +100,7 @@ Swal.fire({
   confirmButtonText: 'Yes, delete it!'
 }).then((result)=> {
    if(result.isConfirmed){
-
+  toastr["success"]("Please wait, your request is being processing");
       $.ajax({
         type: 'DELETE',
         url : '/interns',

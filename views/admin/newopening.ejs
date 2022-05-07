@@ -105,6 +105,9 @@ $('#newopeningform #form').submit((e)=>{
 */
 
   var formData = new FormData(document.getElementById('form'));
+
+  toastr["success"]("Please wait, your request is being processing");
+  
   $.ajax({
     type : 'POST',
     url: '/career/openings/new',
