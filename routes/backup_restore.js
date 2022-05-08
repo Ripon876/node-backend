@@ -36,7 +36,7 @@ router.get("/create-backup",middlewares.isLoggedIn,async (req,res)=> {
 
 router.post('/restore',async (req,res)=> {
 	if(req.files){
-		// console.log(req.files.backupFile)
+		
 
   await Restore(req.files.backupFile)
   .then((data)=> {
