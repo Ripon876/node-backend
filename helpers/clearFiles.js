@@ -28,7 +28,7 @@ Filehound.create()
 			folder = './public/uploads/' + folder + '/';
 		}
 
-
+ 
 		fs.readdir(folder, (err, files) => {
 
 		  if (err) throw err;
