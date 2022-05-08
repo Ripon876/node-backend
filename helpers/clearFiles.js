@@ -8,7 +8,7 @@ const  clearFiles = ()=> {
 
 var folders = []
 Filehound.create()
-  .path(path.join('./public/uploads'))
+  .path(path.join(__dirname,'../public/uploads'))
   .directory()  
   .find()
   .then((directories) => {
@@ -21,7 +21,7 @@ Filehound.create()
   .then(()=> {
   	folders.forEach((folder)=> {
 
-		var folder = path.join('./public/uploads/' + folder + '/');
+		var folder = path.join(__dirname , '../public/uploads/' + folder + '/');
 
 		fs.readdir(folder, (err, files) => {
 
