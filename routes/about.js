@@ -27,7 +27,7 @@ router.put('/about',middlewares.isLoggedIn,async (req,res) => {
   if(req.body){
 
   	
-  var serverURl = `${req.protocol}://${req.get('host')}`;
+    var serverURl = `${req.protocol}://${req.get('host')}`;
 	var fileName =  'about';
 	var link = serverURl;
 

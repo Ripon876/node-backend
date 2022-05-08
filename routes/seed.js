@@ -60,28 +60,28 @@ const SEED = {
 
 };
 
-/*Site_settings.collection.drop();
-Slider.collection.drop();
-About.collection.drop();
-Services.collection.drop();
-Clients.collection.drop();
-WeOffer.collection.drop();
-Messages.collection.drop();
-Careers.collection.drop();
-Interns.collection.drop();
-*/
+// Site_settings.collection.drop();
+// Slider.collection.drop();
+// About.collection.drop();
+// Services.collection.drop();
+// Clients.collection.drop();
+// WeOffer.collection.drop();
+// Messages.collection.drop();
+// Careers.collection.drop();
+// Interns.collection.drop();
 
-/*(async () => {
-	await Site_settings.create(SEED.settings);
-	await Slider.create(SEED.slider);
-	await About.create(SEED.about);
-	await Services.create(SEED.services);
-	await Clients.create(SEED.clients);
-	await WeOffer.create(SEED.weoffers);
-	await Careers.create(SEED.careers);
-	console.log('initial schema added');
-})();
-*/
+
+// (async () => {
+// 	await Site_settings.create(SEED.settings);
+// 	await Slider.create(SEED.slider);
+// 	await About.create(SEED.about);
+// 	await Services.create(SEED.services);
+// 	await Clients.create(SEED.clients);
+// 	await WeOffer.create(SEED.weoffers);
+// 	await Careers.create(SEED.careers);
+// 	console.log('initial schema added');
+// })();
+
 
 
 

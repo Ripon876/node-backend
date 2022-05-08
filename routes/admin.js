@@ -64,9 +64,12 @@ router.get('/admin/reset',middlewares.isLoggedIn, async (req,res)=> {
 	await Services.collection.drop();
 	await Clients.collection.drop();
 	await WeOffer.collection.drop();
-	await Messages.collection.drop();
 	await Careers.collection.drop();
+	await Messages.create({});
+	await Messages.collection.drop();
+	await Interns.create({});
 	await Interns.collection.drop();
+	await Applications.create({});
 	await Applications.collection.drop();
 	// console.log('db cleared')
 	await Site_settings.create(SEED.settings);
@@ -76,6 +79,11 @@ router.get('/admin/reset',middlewares.isLoggedIn, async (req,res)=> {
 	await Clients.create(SEED.clients);
 	await WeOffer.create(SEED.weoffers);
 	await Careers.create(SEED.careers);
+
+	
+	
+
+
 	await clearFiles();
 	// console.log('initial schema added');
 	res.json({status : true})

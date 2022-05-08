@@ -69,6 +69,7 @@ var clients  = require("./routes/clients");
 var weoffer  = require("./routes/weoffer");
 var messages  = require("./routes/messages");
 var applications  = require("./routes/application");
+var backup_restore  = require("./routes/backup_restore");
 
 
 
@@ -125,11 +126,12 @@ app.use(about);      // about route
 app.use(settings);  // settings route
 app.use(services); // services route
 app.use(career);  // career route
-app.use(interns);          // interns route
-app.use(clients);         // clients route
-app.use(weoffer);        // what we offer route
-app.use(messages);      // messages ( message from contact form) route
-app.use(applications); // applications route
+app.use(interns);             // interns route
+app.use(clients);            // clients route
+app.use(weoffer);           // what we offer route
+app.use(messages);         // messages ( message from contact form) route
+app.use(applications);    // applications route
+app.use(backup_restore); // applications route
 
 
 app.get('/',(req,res) => {
@@ -146,3 +148,7 @@ app.listen(port, () => {
 setInterval(function() {
     http.get("http://bange-api.herokuapp.com/");
 }, 300000); // every 5 minutes (300000)
+
+
+
+
