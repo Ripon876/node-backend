@@ -11,6 +11,7 @@ var Messages = require("../models/messages");
 var Careers = require("../models/careers");
 var Interns = require("../models/interns");
 var Applications = require("../models/application");
+var TeamMembers = require("../models/team_member");
 var UploadFile = require("../helpers/fileUpload");
 
 
@@ -234,6 +235,21 @@ router.get("/interns/:id",(req,res) => {
 
 })
 
+// team route
+router.get("/team",(req,res) => {
+  TeamMembers.find({},(err,data) => {
+    if(data === []){
+      console.log(" empty")
+    }
+    if(err || data === []){
+      res.status(400).json({err: "something went wrong"});
+      console.log(err)
+    }else{
+     res.status(200).json(data);      
+    }
+
+  })
+})
 
 
 router.post('/contact',(req,res) => {

@@ -11,6 +11,7 @@ var Messages = require("../models/messages");
 var Careers = require("../models/careers");
 var Interns = require("../models/interns");
 var Applications = require("../models/application");
+var TeamMembers = require("../models/team_member");
 var middlewares = require("../middlewares/middleware");
 var clearFiles = require('../helpers/clearFiles');
 var SEED  = require("./seed");
@@ -71,6 +72,8 @@ router.get('/admin/reset',middlewares.isLoggedIn, async (req,res)=> {
 	await Interns.collection.drop();
 	await Applications.create({});
 	await Applications.collection.drop();
+	await TeamMembers.create({});
+	await TeamMembers.collection.drop();
 	// console.log('db cleared')
 	await Site_settings.create(SEED.settings);
 	await Slider.create(SEED.slider);

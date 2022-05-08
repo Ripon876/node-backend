@@ -1,0 +1,171 @@
+<%- include("../../partials/admin-header") -%>
+<%- include("../../partials/admin-nav") -%>
+
+
+        <div class="content-wrapper p-5">
+         
+          <div class="row">
+            <div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                <div class="align-items-baseline d-flex justify-content-between">
+                <p class="card-title">New Team Member</p>
+                </div>
+
+
+  
+
+              <div class="newMember py-5">
+                      <form id="form" method="post" enctype="multipart/form-data">
+                             <div class="form-group">
+                                  <label for="name">Name</label>
+                                  <input type="text" class="form-control"  name="name"  id="name" placeholder="name">
+                              </div>
+                              <div class="form-group">
+                                  <label for="position">Position</label>
+                                  <input type="text" class="form-control"  name="position"  id="position" placeholder="Position">
+                              </div>
+                            <div class="d-flex form-group row">
+                              <div class="col-lg-4 col-md-4">
+                                <label for="img">Image</label>
+                                <input type="file" style="border: none !important;" class="form-control" name="img" id="img">
+                              </div>
+                              <div id="imgPreviewBox" class="col col-lg-8 text-center" style="height: 500px;width: auto;margin: auto;overflow: scroll;position: relative;">
+                                <img src=''   id="logoPreview"   class="img-fluid"style="left: 50%;transform: translate(-50%, 0);position: absolute;">
+                              </div>
+                            </div>
+                            <div class="form-group pl-4">
+                              
+<div class="form-check">
+  <input class="form-check-input"  type="checkbox"  name="isCeo" id="flexCheckChecked" >
+  <label class="form-check-label m-0" for="flexCheckChecked">
+    Checked checkbox
+  </label>
+</div>
+<div class="form-group des">
+  <label for="description">Description</label>
+  <textarea class="form-control" name="description" id="description" rows="10" style="border: 1px solid;" maxlength="500"></textarea> 
+</div>   
+                            </div>
+                      <div class="form-group w-75">
+                                <label for="description">Social Links</label>
+                                <div class="form-group">
+                                  <label for="fb">Facebook</label>
+                                  <input type="text" class="form-control"  name="fb" id="fb" placeholder="https://facebook.com">
+                                </div>
+                                <div class="form-group">
+                                  <label for="instagram">Instagram</label>
+                                  <input type="text" class="form-control" name="instagram" id="instagram" placeholder="https://instagram.com">
+                                </div>
+                                <div class="form-group">
+                                  <label for="twitter">Twitte</label>
+                                  <input type="text" class="form-control"   name="twitter" id="twitter" placeholder="https://twitter.com">
+                                </div>
+                                <div class="form-group">
+                                  <label for="linkedin">LinkedIn</label>
+                                  <input type="text" class="form-control"   name="linkedin" id="linkedin" placeholder="https://linkedin.com">
+                                </div>
+                              </div>
+                           <div>
+                              <button type="submit" id="submit" class="btn btn-primary">Save</button>
+                          </div>
+                      </form>
+                    </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+<script type="text/javascript">
+  
+$('.des').hide();
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          function na(){
+            $('#logoPreview').attr("src", e.target.result)
+            $('#imgPreviewBox').show(300);
+          }
+          na();
+        }
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+      }
+    }
+    $("#img").change(function() {
+    readURL(this);
+    });
+
+</script>
+
+
+
+
+<script> 
+$('.newMember #form').submit((e)=>{
+  e.preventDefault();
+  var formData = new FormData(document.getElementById('form'));
+
+
+
+  toastr["success"]("Please wait, your request is being processing");
+
+  
+  $.ajax({
+    type : 'POST',
+    url: '/team',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(res) {
+      if(res.status){
+       Swal.fire(
+          'Success',
+          'Member Added',
+          'success'
+        ).then(()=> {
+          window.location.href = "/team"
+        })
+      }
+    },
+    error : function(err){
+      Swal.fire(
+          'Error',
+          'Something went wrong',
+          'error'
+        )
+    }
+  })
+})
+
+</script>
+
+
+<script>
+  $('#flexCheckChecked').click((e)=> {
+       if(e.target.checked){
+  
+$('.des').show(300);
+
+       }else{
+
+$('.des').hide(200);
+       }
+  })
+</script>
+
+
+
+
+
+
+
+
+
+
+<%- include("../../partials/admin-footer") -%>

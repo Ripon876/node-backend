@@ -70,6 +70,7 @@ var weoffer  = require("./routes/weoffer");
 var messages  = require("./routes/messages");
 var applications  = require("./routes/application");
 var backup_restore  = require("./routes/backup_restore");
+var team  = require("./routes/team");
 
 
 
@@ -132,6 +133,7 @@ app.use(weoffer);           // what we offer route
 app.use(messages);         // messages ( message from contact form) route
 app.use(applications);    // applications route
 app.use(backup_restore); // applications route
+app.use(team); // applications route
 
 
 app.get('/',(req,res) => {
