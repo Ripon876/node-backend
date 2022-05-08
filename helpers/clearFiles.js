@@ -21,7 +21,7 @@ Filehound.create()
   .then(()=> {
   	folders.forEach((folder)=> {
 
-		var folder = './public/uploads/' + folder + '/';
+		var folder = './' + folder + '/';
 
 		fs.readdir(folder, (err, files) => {
 
