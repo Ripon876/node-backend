@@ -6,6 +6,9 @@ const serviceSchema = new mongoose.Schema({
 	img :  String,
 	title :  String,
 	description : String,
+	full_description : String,
+	link : String,
+	keywords : String,
 	show_content_first : {type: Boolean, default: false}
 },{ _id : false })
 

@@ -1,6 +1,8 @@
 <%- include("../../partials/admin-header") -%>
 <%- include("../../partials/admin-nav") -%>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.10/css/froala_editor.min.css" integrity="sha512-nAJK2yafVBW/IqrSgLaNgFeISsusduUoQ8WTNDvHwdnThbiGoP3Myc4fq0Z0bGS8ZowxzGLafmPtHwTp2T5qRQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/plugins/image.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/plugins/fullscreen.min.css" />
 
         <div class="content-wrapper p-5">
          
@@ -30,7 +32,7 @@
                         </div>
                         <div class="form-group">
                           <label for="description">Description</label>
-                          <textarea class="form-control border"  required name="description" id="description" rows="3" placeholder="description" maxlength="125"></textarea>
+                          <textarea class="form-control border"  required name="description" id="description" rows="10" placeholder="description" maxlength="350"></textarea>
                         </div>
                         <div class="form-group d-flex">
                         <div  class="px-4 py-3">
@@ -43,6 +45,33 @@
                         </div>
 
                         </div>
+
+
+
+
+
+
+<div class="form-check">
+  <input class="form-check-input"  type="checkbox"  name="moreDetails" id="flexCheckChecked" >
+  <label class="form-check-label m-0" for="flexCheckChecked">
+    Add More Details
+  </label>
+</div>
+<div class="form-group des">
+  <label for="full_description">Description</label>
+  <textarea class="form-control" name="full_description" id="full_description" rows="15" style="border: 1px solid;" maxlength="500"></textarea> 
+</div>  
+<div class="form-group des">
+  <label for="keywords">Keywords</label>
+  <input type="text" title="seperate keywords with comma" class="form-control" value='<%= settings.keywords %>'  name="keywords" id="keywords" placeholder="type keywords here">
+</div>
+
+
+
+
+
+
+
                   <div>
                       <button type="submit" id="submit" class="btn btn-primary">Add</button>
                   </div>
@@ -58,10 +87,71 @@
 
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.10/js/froala_editor.min.js" integrity="sha512-M21u/bhNAlYd5NOd271FkyJrmFxRGOA492Y0g0T8d+5u7iGrAo6uTrBzxD3vV1HKMyTyYYehio3O+7LDvYHDYA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/image.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/align.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/lists.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/font_size.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/font_size.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/video.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/fullscreen.min.js"></script>
+
+
 
 <script type="text/javascript">
-  
 
+   var editor = new FroalaEditor('#full_description',{
+      pluginsEnabled: ['align','image','lists','fontSize','video','fullscreen']
+   });
+
+
+
+</script>
+
+
+
+
+
+
+
+<script>
+  $('.des').hide();
+
+
+
+  $('#flexCheckChecked').click((e)=> {
+       if(e.target.checked){
+  
+$('.des').show(300);
+
+       }else{
+
+$('.des').hide(200);
+       }
+  })
+</script>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+ 
     function readURL(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();

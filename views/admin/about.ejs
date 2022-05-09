@@ -38,7 +38,11 @@
                               </div>
                               <div class="form-group">
                                   <label for="description">Long Description</label>
-                                  <textarea class="form-control border"    name="long_descrition" id="long_descrition" rows="10" placeholder="description" maxlength="350"><%= about.long_descrition %></textarea>
+                                  <textarea class="form-control border"    name="long_descrition" id="long_descrition" rows="10" placeholder="description" maxlength="450"><%= about.long_descrition %></textarea>
+                              </div>
+                              <div class="form-group">
+                                <label for="keywords">Keywords</label>
+                                 <input type="text" title="seperate  keywords with comma" class="form-control" value='<%= about.keywords %>'  name="keywords" id="keywords" placeholder="type keywords here">
                               </div>
                            <div>
                               <button type="submit" id="submit" class="btn btn-primary">Save</button>
@@ -363,4 +367,5 @@ Swal.fire({
 </script>
 
 
+<%- include("../../partials/html-editor") -%>
 <%- include("../../partials/admin-footer") -%>

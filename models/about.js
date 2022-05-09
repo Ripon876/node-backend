@@ -15,6 +15,7 @@ const aboutSchema = new mongoose.Schema({
 	short_description : String,
 	long_descrition : String,
 	img : String,
+	keywords : String,
 	benefits :  [benefitSchema]
 })
 

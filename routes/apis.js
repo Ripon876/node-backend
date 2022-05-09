@@ -86,6 +86,38 @@ router.get("/services",(req,res) => {
 })
 
 
+router.get("/services/:name",(req,res)=> {
+
+  if(req.params.name){
+
+
+ Services.find({},(err,services)=> {
+ if(err || services == []){
+     res.status(400).json({err: "something went wrong"}) 
+   }else{
+
+  var serviceIndex =  services[0].services.findIndex((obj)=> obj.link === req.params.name )
+
+  res.status(200).json(services[0].services[serviceIndex]);
+
+
+   }
+ })
+
+
+  }else{
+    res.status(400).json({err: "something went wrong"}) 
+  }
+})
+
+
+
+
+
+
+
+
+
 // our clients api
 router.get("/clients",(req,res) => {
   Clients.find({},(err,data) => {

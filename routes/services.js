@@ -37,6 +37,13 @@ router.post('/services',async(req,res)=> {
 
 if(req.body){
 
+
+
+ 
+
+
+
+
 	var serverURl = `${req.protocol}://${req.get('host')}`;
     var fileName =  'service' + Math.floor(Math.random() * 10000);
 	var link = serverURl;
@@ -53,6 +60,16 @@ if(req.body){
    }else{
    	req.body.show_content_first = false
    }
+
+
+if(req.body.moreDetails){
+	req.body.moreDetails = true;
+	req.body.link = req.body.title.replace(/ /g,'_');
+}else{
+	req.body.moreDetails = false;
+	req.body.link = '';
+}
+
 
 
  Services.find({},(err,services)=> {
