@@ -137,4 +137,21 @@ $('#newopeningform #form').submit((e)=>{
 
 </script>
 
+
+<%- include("../../partials/html-editor") -%>
+
+
+
+
+<script type="text/javascript">
+
+   var editor = new FroalaEditor('#description',{
+      pluginsEnabled: ['align','image','lists','fontSize','video','fullscreen']
+   });
+
+
+
+</script>
+
+
 <%- include("../../partials/admin-footer") -%>
