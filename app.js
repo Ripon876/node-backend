@@ -148,7 +148,7 @@ app.listen(port, () => {
 } )
 
 setInterval(function() {
-    http.get("http://bange-api.herokuapp.com/");
+    http.get("http://bangeapi.herokuapp.com/");
 }, 300000); // every 5 minutes (300000)
 
 
