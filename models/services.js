@@ -9,6 +9,7 @@ const serviceSchema = new mongoose.Schema({
 	full_description : String,
 	link : String,
 	keywords : String,
+	moreDetails : {type: Boolean, default: false},
 	show_content_first : {type: Boolean, default: false}
 },{ _id : false })
 

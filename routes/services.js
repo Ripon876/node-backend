@@ -142,6 +142,15 @@ router.put('/services/service',middlewares.isLoggedIn,async (req,res) => {
 		     	newData.show_content_first = false;
 		    }
 
+		    if(newData.moreDetails){
+		    	newData.moreDetails = true;
+				newData.link = req.body.title.replace(/ /g,'_');
+			}else{
+				newData.moreDetails = false;
+				newData.link = '';
+			}
+
+   
 		    if(req.files && deleteFile(getImgName(JSON.parse(oldData).img),'services')){
 
 		    	newData.img = link;
@@ -163,8 +172,12 @@ router.put('/services/service',middlewares.isLoggedIn,async (req,res) => {
 					 
 					   services.services[serviceIndex] = newData;
 					   services.save((err,service)=> {
-					   		if(err) res.status(501).json({err: "something went wrong"});
-						      	res.status(200).json({status :  true,service : services.services[serviceIndex]});
+					   		if(err){
+					   			res.status(501).json({err: "something went wrong"});
+					   		}else{
+					   			res.status(200).json({status :  true,service : services.services[serviceIndex]});
+					   		} 
+						      	
 					   })
 			   })
 
