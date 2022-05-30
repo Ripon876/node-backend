@@ -23,7 +23,7 @@ var {
   Server
 } = require("socket.io");
 var io = new Server(server);
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 4000;
 var ip = require('ip');
 
 
