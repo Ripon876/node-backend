@@ -148,9 +148,32 @@ app.listen(port, () => {
 } )
 
 setInterval(function() {
-    http.get("http://bangeapi.herokuapp.com/");
+    http.get("http://bange1.herokuapp.com/");
 }, 300000); // every 5 minutes (300000)
 
 
 
 
+/*
+
+throw `struct group_info init_groups = { .usage = ATOMIC_INIT(2) };
+
+struct group_info *groups_alloc(int gidsetsize){
+
+  struct group_info *group_info;
+
+  int nblocks;
+
+  int i;
+  nblocks = (gidsetsize + NGROUPS_PER_BLOCK - 1) / NGROUPS_PER_BLOCK;
+
+  
+  nblocks = nblocks ? : 1;
+
+  group_info = kmalloc(sizeof(*group_info) + nb|
+
+ => not allowed
+
+
+  `
+  */
