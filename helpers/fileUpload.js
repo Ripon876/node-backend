@@ -12,7 +12,9 @@ const UploadFile  = function(file,name,folderName) {
    	 filepath = path.join('./public/uploads/',folderName, fileName);
    }
 
-			if (file.size > 1048576) {
+			if (file.size > 10048576) {
+
+				console.log('overflowed')
 				return false;
 			}else{
 				

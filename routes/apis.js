@@ -43,6 +43,7 @@ router.get('/slides',(req,res) => {
      }else{
    
       var sliders =   slider[0].toObject();
+      console.log(sliders)
       delete sliders._id;
       delete sliders.__v;
       res.status(200).json(sliders);
