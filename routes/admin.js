@@ -30,7 +30,7 @@ router.get('/admin',middlewares.isLoggedIn,async(req,res) => {
 	var applications = await  Applications.find({});
 	var settings = await  Site_settings.find({});
     
-
+console.log(settings)
 
 
 settings[0].logo = getName(settings[0].logo).split('.')[0]

@@ -18,11 +18,11 @@ var app = express();
 var http = require('http');
 var cors = require('cors');
 var https = require('https');
-var server = http.createServer(app);
-var {
-  Server
-} = require("socket.io");
-var io = new Server(server);
+// var server = http.createServer(app);
+// var {
+//   Server
+// } = require("socket.io");
+// var io = new Server(server);
 var port = process.env.PORT || 5000;
 var ip = require('ip');
 
